@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page not found</title>
-</head>
-<body>
-    <h1>404 Error</h1>
-</body>
-</html>
+<?php $this->view('includes/header') ?>
+    <div class="container-fluid">
+        <h1><i class="fas fa-xmark"></i>Page Not found</h1>
+    </div>
+    
+<?php $this->view('includes/footer') ?>
