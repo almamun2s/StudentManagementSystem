@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
+.sms-nav ul{
+    display: flex;
+    list-style: none;
+    background-color: #232a5c;
+    align-items: center;
+    padding: 0;
+}
+.sms-nav ul li{
+    display: inline-block;
+    background-color: #232a5c;
+    color: #fff;
+    font-family: oswald;
+    font-weight: 700;
+    text-transform: uppercase;
+    position: relative;
+}
+.sms-nav ul li:hover > ul{
+    visibility: visible;
+    opacity: 1;
+}
+.sms-nav ul li a{
+    color: #fff;
+    display: inline-block;
+    text-decoration: none;
+    padding: 1rem;
+    transition: all 0.3s ease;
+}
+.sms-nav ul li a.active{
+    color: #ff0052;
+}
+.sms-nav ul li a:hover{
+    color: #ff0052;
+}
+
+/* Drop Down section */
+.sms-nav ul li ul{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+
+    visibility: hidden;
+    opacity: 0;
+}

@@ -6,5 +6,7 @@
     <title>Student management System</title>
     <link rel="stylesheet" href="assets/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/all.min.css">
+    <link rel="stylesheet" href="assets/style.css">
 </head>
 <body style="min-width: 350px;">
+<div style="max-width: 1200px; width:90%; margin: auto;"  >
