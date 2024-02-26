@@ -7,11 +7,10 @@ class Controller{
     public function view($view, $data = array()){
         extract($data);
         
-        $pathOfViewFile = 'private/views/'.$view.'.view.php'; 
-        if (file_exists($pathOfViewFile)) {
-            include $pathOfViewFile;
+        if (file_exists('private/views/'.$view.'.view.php')) {
+            require 'private/views/'.$view.'.view.php';
         }else {
-            include 'private/views/404.view.php';
+            require 'private/views/404.view.php';
         }
     }
 }
