@@ -4,6 +4,9 @@
  */
 class Home extends Controller{
     public function index(){
-        $this->view('home');
+        $db = new Database();
+        $data = $db->run("select * from users");
+
+        $this->view('home', ['row' => $data]);
     }
 }
