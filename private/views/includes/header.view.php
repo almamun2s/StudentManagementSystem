@@ -10,3 +10,5 @@
 </head>
 <body style="min-width: 350px;">
 <div style="max-width: 1200px; width:90%; margin: auto;"  >
+
+<?php $this->view('includes/nav') ?>

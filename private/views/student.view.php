@@ -1,5 +1,6 @@
 <?php $this->view('includes/header') ?>
-
-<h1>This is Student view file</h1>
-
+    <div class="container-fluid">
+        <h1><i class="fab fa-facebook"></i>Students</h1>
+    </div>
+    
 <?php $this->view('includes/footer') ?>
