@@ -16,7 +16,7 @@ class Database{
         return $conn;
     }
 
-    public function run($query , array $data = array(), string $data_type = 'object' ):array|bool{
+    public function run(string $query , array $data = array(), string $data_type = 'object' ):array|bool{
         $conn = $this->connect();
         $stmt = $conn->prepare($query);
 
@@ -38,7 +38,4 @@ class Database{
         return false;
     }
 
-    public function query(){
-
-    }
 }

@@ -24,4 +24,14 @@ class Model extends Database{
         $query = 'select * from '. $this->table;
         return $this->run($query);
     }
+
+    public function insert(array $data){
+        $keys       = array_keys($data);
+        $columns    = implode( ', ', $keys);
+        $values     = implode(', :', $keys);
+
+        $query = "INSERT into $this->table ($columns)  values( :$values ) ";
+        return $this->run($query, $data);
+    }
+
 }
