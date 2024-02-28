@@ -1,11 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 
+.sms-nav{
+    background-color: #232a5c;
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-between;
+}
 .sms-nav ul{
     display: flex;
     list-style: none;
-    background-color: #232a5c;
+    /* background-color: #232a5c; */
     align-items: center;
     padding: 0;
+    margin: 0;
 }
 .sms-nav ul li{
     display: inline-block;
@@ -36,6 +43,7 @@
 
 /* Drop Down section */
 .sms-nav ul li ul{
+    right: 0;
     position: absolute;
     display: flex;
     flex-direction: column;
