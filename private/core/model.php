@@ -4,14 +4,24 @@
  *  Main Model class 
  */
 class Model extends Database{
-    protected $table = 'users';
 
+    public function __construct(){
+        if ( !property_exists($this, 'table')) {
+            $this->table = strtolower($this::class) . 's';
+        }
+    }
     public function where( string $column, string|int $value){
-        $query = 'select * from '. $this->table .' where :colume = :value ';
-        
+
+        $column = addslashes($column);
+        $query = 'select * from '. $this->table .' where '.$column.' = :value ';
         return $this->run($query, [
-            'column'    => $column,
             'value'     => $value
         ]);
+    }
+
+    public function findAll(){
+
+        $query = 'select * from '. $this->table;
+        return $this->run($query);
     }
 }

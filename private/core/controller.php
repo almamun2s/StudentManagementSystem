@@ -13,4 +13,13 @@ class Controller{
             require 'private/views/404.view.php';
         }
     }
+
+    public function load_models($model){
+        if (file_exists('private/models/'. strtolower($model).'.php')) {
+            require_once 'private/models/'.strtolower($model).'.php';
+
+            return $model = new $model();
+        }
+        return false;
+    }
 }
