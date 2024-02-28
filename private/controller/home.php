@@ -4,10 +4,6 @@
  */
 class Home extends Controller{
     public function index(){
-        // $db = new Database();
-        // $data = $db->run("select * from users");
-        // $user = $this->load_models('User');
-        // $data = $user->where('user_id', 'ta' );
 
         $user = new User();
         
@@ -18,7 +14,8 @@ class Home extends Controller{
         // $arr["school_id"]= "1";
         // $arr["role"]    = "student";
 
-        $user->update(5, $arr);
+        // $user->update(5, $arr);
+        // $user->delete(10);
         $data = $user->findAll();
 
         $this->view('home', ['row' => $data]);

@@ -34,9 +34,7 @@ class Model extends Database{
         return $this->run($query, $data);
     }
 
-    public function update( int $id, array $data){
-        // $keys       = array_keys($data);
-        
+    public function update( int $id, array $data){        
         $setData = '';
         foreach ($data as $key => $value) {
             $setData .= $key. " = :" .$key .', ';
@@ -47,5 +45,10 @@ class Model extends Database{
         $query = "UPDATE $this->table SET  $setData WHERE id = :id";
 
         return $this->run($query, $data);
+    }
+
+    public function delete( int $id){
+        $query = "DELETE FROM $this->table WHERE id = :id";
+        return $this->run($query, ['id' => $id]);
     }
 }
