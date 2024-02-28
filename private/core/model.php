@@ -34,4 +34,18 @@ class Model extends Database{
         return $this->run($query, $data);
     }
 
+    public function update( int $id, array $data){
+        // $keys       = array_keys($data);
+        
+        $setData = '';
+        foreach ($data as $key => $value) {
+            $setData .= $key. " = :" .$key .', ';
+        }
+        $setData = trim($setData , ", ");
+        $data['id'] = $id;
+
+        $query = "UPDATE $this->table SET  $setData WHERE id = :id";
+
+        return $this->run($query, $data);
+    }
 }

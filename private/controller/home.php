@@ -11,14 +11,14 @@ class Home extends Controller{
 
         $user = new User();
         
-        $arr["fname"]   = "John";
-        $arr["lname"]   = "Doe";
-        $arr["user_id"] = "john";
-        $arr["gender"]  = "male";
-        $arr["school_id"]= "1";
-        $arr["role"]    = "student";
+        $arr["fname"]   = "Jane";
+        $arr["lname"]   = "Dane";
+        // $arr["user_id"] = "john";
+        $arr["gender"]  = "female";
+        // $arr["school_id"]= "1";
+        // $arr["role"]    = "student";
 
-        // $user->insert($arr);
+        $user->update(5, $arr);
         $data = $user->findAll();
 
         $this->view('home', ['row' => $data]);
