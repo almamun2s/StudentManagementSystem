@@ -4,6 +4,7 @@
  *  Main Model class 
  */
 class Model extends Database{
+    public $errors = array();
 
     public function __construct(){
         if ( !property_exists($this, 'table')) {

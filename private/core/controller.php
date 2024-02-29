@@ -4,7 +4,7 @@
  * Main Controller
  */
 class Controller{
-    public function view($view, $data = array()){
+    protected function view($view, $data = array()){
         extract($data);
         
         if (file_exists('private/views/'.$view.'.view.php')) {
@@ -14,12 +14,17 @@ class Controller{
         }
     }
 
-    public function load_models($model){
+    protected function load_models($model){
         if (file_exists('private/models/'. strtolower($model).'.php')) {
             require_once 'private/models/'.strtolower($model).'.php';
 
             return $model = new $model();
         }
         return false;
+    }
+
+    protected function redirect(string $url_ext){
+        header('location:' . ROOT . $url_ext);
+        exit;
     }
 }
