@@ -3,7 +3,23 @@
  * User Model
  */
 
- class User extends Model{
+class User extends Model{
+
+    protected $allowedColumn = [
+        'fname', 
+        'lname', 
+        'email',
+        'gender',
+        'role',
+        'password'
+    ];
+    protected $beforeInsert = [
+        'make_user_id', 
+        'make_school_id', 
+        'make_hash_password',
+        'make_date'
+    ];
+
     public function validate(array $data){
         $this->errors = array();
 
@@ -57,5 +73,29 @@
             return true;
         }
         return false;
+    }
+
+
+    public function make_user_id($data){
+        // Logic will goes here
+        return $data;
+
+    }
+
+    public function make_school_id($data){
+        // Logic will goes here
+        return $data;
+
+    }
+
+    public function make_hash_password($data){
+        
+        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT );
+        return $data;
+    }
+    
+    public function make_date($date){
+        $date['date'] = date('Y-m-d h:i:s');
+        return $date;
     }
  }

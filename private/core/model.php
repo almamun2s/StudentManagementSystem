@@ -27,6 +27,25 @@ class Model extends Database{
     }
 
     public function insert(array $data){
+
+        // Check for allowed column
+        if ( property_exists($this, 'allowedColumn' )) {
+            
+            foreach ($data as $key => $column) {
+                if ( !in_array($key, $this->allowedColumn )) {
+                    // Remove the column if it is not allowed for editing
+                    unset($data[$key]);
+                }
+            }
+        }
+
+        if ( property_exists($this, 'beforeInsert' )) {
+            
+            foreach ($this->beforeInsert as $func) {
+                $data = $this->$func($data);
+            }
+        }
+
         $keys       = array_keys($data);
         $columns    = implode( ', ', $keys);
         $values     = implode(', :', $keys);
