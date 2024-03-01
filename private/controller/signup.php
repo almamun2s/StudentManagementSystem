@@ -16,9 +16,9 @@ class Signup extends Controller{
             }
         }
         // $this->redirect('');
-        echo '<pre>';
-        var_dump($errors);
-        echo '</pre>';
+        // echo '<pre>';
+        // var_dump($errors);
+        // echo '</pre>';
     
         $this->view('signup', ['errors' => $errors ]);
 

@@ -15,3 +15,12 @@ function get_selected($key, $value){
     }
     return '';
 }
+
+function get_error(array $errors,  $key){
+    if ( isset($errors[$key])) {
+        return  $errors[$key];
+
+    }else{
+        return '';
+    }
+}

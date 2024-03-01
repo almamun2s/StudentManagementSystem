@@ -10,15 +10,15 @@
         // Check first name 
         if ( empty($data['fname']) ) {
             $this->errors['fname'] = 'The First Name cannot be empty';
-        }elseif ( !preg_match('/^[a-zA-Z0-9]+$/', $data['fname'] ) ) {
-            $this->errors['fname'] = 'Only letters and numbers are allowed';
+        }elseif ( !preg_match('/^[a-zA-Z]+$/', $data['fname'] ) ) {
+            $this->errors['fname'] = 'Only letters are allowed';
         }
 
         // Check last name 
         if ( empty($data['lname']) ) {
             $this->errors['lname'] = 'The Last Name cannot be empty';
-        }elseif ( !preg_match('/^[a-zA-Z0-9]+$/', $data['lname'] ) ) {
-            $this->errors['lname'] = 'Only letters and numbers are allowed';
+        }elseif ( !preg_match('/^[a-zA-Z]+$/', $data['lname'] ) ) {
+            $this->errors['lname'] = 'Only letters are allowed';
         }
         
         // Check Email
