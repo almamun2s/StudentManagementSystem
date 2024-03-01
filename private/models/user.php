@@ -44,6 +44,15 @@
             $this->errors['role'] = 'Role is not valid';
         }
 
+        // Check for Password
+        if (empty($data['password'])) {
+            $this->errors['password'] = 'Password cannot be empty';
+        }elseif ( strlen($data['password']) < 8 ) {
+            $this->errors['password'] = 'Password must at least 8 charactor';
+        }elseif ( $data['password'] !== $data['password2'] ) {
+            $this->errors['password'] = 'Password did not match';
+        }
+
         if (count($this->errors) == 0 ) {
             return true;
         }
