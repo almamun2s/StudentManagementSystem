@@ -4,6 +4,12 @@
             <h2 class="text-center" >Add User</h2>
             <form action="signup" method="post">
                 <input name="fname" placeholder="First Name" type="text" class="my-4 form-control" autofocus autocomplete="off">
+                <?php 
+                    echo '<pre>';
+                    var_dump($errors);
+                    echo '</pre>';
+                    echo $errors['fname'];
+                ?>
                 <input name="lname" placeholder="Last Name" type="text" class="my-4 form-control" autocomplete="off">
                 <input name="email" placeholder="Email" type="email" class="my-4 form-control" autocomplete="off">
 
@@ -19,7 +25,7 @@
                     <option value="reception">Reception</option>
                     <option value="lecturer">Lecturer</option>
                     <option value="admin">Admin</option>
-                    <option value="super_admin">Super Admin</option>
+                    <option value="super">Super Admin</option>
                 </select>
 
                 <input name="password" placeholder="Password" type="text" class="my-4 form-control" autocomplete="off">
