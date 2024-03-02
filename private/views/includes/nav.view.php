@@ -1,10 +1,11 @@
 <nav class="sms-nav" >
     <ul>
         <li><a href="home">Dashboard</a></li>
-        <li><a href="#">Users</a></li>
-        <li><a href="#">Classes</a></li>
-        <li><a href="#" class="active" >Tests</a></li>
-        <!-- <li><a href="#">User</a></li> -->
+        <li><a href="schools">schools</a></li>
+        <li><a href="users">staffs</a></li>
+        <li><a href="students">students</a></li>
+        <li><a href="class">Classes</a></li>
+        <li><a href="tests" class="active" >Tests</a></li>
     </ul>
     <ul>
         <?php if (Auth::is_logged_in()): ?>
