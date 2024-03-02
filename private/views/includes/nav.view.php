@@ -8,6 +8,6 @@
     </ul>
     <ul>
         <li><a href="profile">Profile</a></li>
-        <li><a href="logout">Logout</a></li>
+        <li><a href="profile/logout">Logout</a></li>
     </ul>
 </nav>
