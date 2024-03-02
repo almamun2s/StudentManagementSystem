@@ -12,14 +12,22 @@
                         <span class="btn btn-primary" id="addNewSchool" ><i class="fas fa-plus"></i> Add new School</span>
                     </th>
                 </tr>
+                <?php if($schools) : ?>
+                    <?php foreach ($schools as $school ): ?>
+                        <tr>
+                            <td><?= $school->school_name ?></td>
+                            <td><?= $school->user_id ?></td>
+                            <td><?= $school->date ?></td>
+                            <td>
+                                <button class="btn btn-info text-white" ><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-danger" ><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>    
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <h2>No School found</h2>
+                <?php endif; ?>
             </table>
-            <?php if($schools) : ?>
-                <?php foreach ($schools as $school ): ?>
-
-                <?php endforeach; ?>
-            <?php else: ?>
-                <h2>No School found</h2>
-            <?php endif; ?>
 
 
         </div>
@@ -28,9 +36,9 @@
     <!-- Add New School Popup  -->
     <div class="sms-add_new_school">
         <div class="sms-school_form border shadow p-4">
-            <form action="#" method="post">
+            <form action="schools/add" method="post">
                 <h3>Add new School</h3>
-                <input type="text" name="school" class="form-control" autofocus placeholder="School Name" >
+                <input type="text" name="school_name" class="form-control" autofocus placeholder="School Name" >
                 <input type="submit" value="Create" class="btn btn-primary mt-4 float-end" >
 
                 <span class="btn btn-danger mt-4" id="addNewSchoolCancel" >Cancel</span>
