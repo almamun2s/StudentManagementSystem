@@ -42,6 +42,8 @@ class User extends Model{
             $this->errors['email'] = 'Email cannot be empty';
         }elseif ( !filter_var( $data['email'] , FILTER_VALIDATE_EMAIL)) {
             $this->errors['email'] = 'Email is not valid';
+        }elseif( $this->where('email', $data['email'])){
+            $this->errors['email'] = 'This email is already exists';
         }
         
         // Check Gender

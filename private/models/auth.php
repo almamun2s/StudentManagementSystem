@@ -20,4 +20,11 @@ class Auth{
         }
         return false;
     }
+
+    public static function user(){
+        if (self::is_logged_in()) {
+            return $_SESSION['user'];
+        }
+        return 'Unknown';
+    }
 }

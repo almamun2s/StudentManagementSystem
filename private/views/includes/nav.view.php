@@ -7,7 +7,12 @@
         <!-- <li><a href="#">User</a></li> -->
     </ul>
     <ul>
-        <li><a href="profile">Profile</a></li>
-        <li><a href="profile/logout">Logout</a></li>
+        <?php if (Auth::is_logged_in()): ?>
+            <li><a href="profile">Profile</a></li>
+            <li><a href="profile/logout">Logout</a></li>
+        <?php else:?>
+            <li><a href="login">Login</a></li>
+            <li><a href="signup">Sign Up</a></li>
+        <?php endif;?>
     </ul>
 </nav>

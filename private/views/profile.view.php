@@ -1,4 +1,9 @@
 <?php $this->view('includes/header') ?>
+<style>
+    td{
+        text-transform: capitalize;
+    }
+</style>
     <div class="container-fluid p-4 shadow mx-auto" style="max-width: 1200px;">
         <?php $this->view('includes/b_crumb') ?>
         <div class="row">
@@ -9,15 +14,15 @@
                 <table class="table table-hover table-striped table-bordered" >
                     <tr>
                         <th>First Name:</th>
-                        <td>Jane</td>
+                        <td><?= Auth::user()->fname ?></td>
                     </tr>
                     <tr>
                         <th>Last Name:</th>
-                        <td>Doe</td>
+                        <td><?= Auth::user()->lname ?></td>
                     </tr>
                     <tr>
                         <th>Gender:</th>
-                        <td>Female</td>
+                        <td><?= Auth::user()->gender ?></td>
                     </tr>
                 </table>
             </div>
