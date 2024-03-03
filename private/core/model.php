@@ -75,7 +75,7 @@ class Model extends Database{
         return $this->run($query, $data);
     }
 
-    public function update( int $id, array $data){        
+    public function update( int $id, array $data){
         $setData = '';
         foreach ($data as $key => $value) {
             $setData .= $key. " = :" .$key .', ';

@@ -19,10 +19,38 @@
                             <td><?= $school->user_id->fname.' '.$school->user_id->lname ?></td>
                             <td><?= get_date($school->date) ?></td>
                             <td>
-                                <button class="btn btn-info text-white" ><i class="fas fa-edit"></i></button>
-                                <button class="btn btn-danger" ><i class="fas fa-trash"></i></button>
+                                <button class="btn btn-info text-white sms-edit_school_btn" onclick="showEditPopup('edit_<?= $school->school_id ?>')" ><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-danger" onclick="showEditPopup('delete_<?= $school->school_id ?>')" ><i class="fas fa-trash"></i></button>
+                                <!-- Edit School Popup  -->
+                                <div class="sms-edit_school" id="edit_<?= $school->school_id ?>" >
+                                    <div class="sms-school_form border shadow p-4">
+                                        <form action="schools/edit" method="post">
+                                            <h3>Edit School(<?= $school->school_name ?>)</h3>
+
+                                            <input type="hidden" name="id" value="<?= $school->id ?>" >
+                                            <input type="text" value="<?= $school->school_name ?>" name="school_name" class="form-control" autofocus placeholder="School Name" >
+                                            <input type="submit" value="Edit" class="btn btn-primary mt-4 float-end" >
+
+                                            <span class="btn btn-danger mt-4" onclick="hideEditPopup('edit_<?= $school->school_id ?>')" >Cancel</span>
+                                        </form>
+                                    </div>
+                                </div>                                
+                                <!-- Delete School Popup  -->
+                                <div class="sms-edit_school" id="delete_<?= $school->school_id ?>" >
+                                    <div class="sms-school_form border shadow p-4">
+                                        <form action="schools/delete" method="post">
+                                            <h3>Are You really want to delete: <br> <?= $school->school_name ?></h3>
+
+                                            <input type="hidden" name="id" value="<?= $school->id ?>" >
+                                            <input type="submit" value="Delete" class="btn btn-danger mt-4 float-end" >
+
+                                            <span class="btn btn-primary mt-4" onclick="hideEditPopup('delete_<?= $school->school_id ?>')" >Cancel</span>
+                                        </form>
+                                    </div>
+                                </div>                                
                             </td>
-                        </tr>    
+                        </tr>
+
                     <?php endforeach; ?>
                 <?php else: ?>
                     <h2>No School found</h2>
