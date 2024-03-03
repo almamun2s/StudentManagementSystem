@@ -25,7 +25,9 @@
                     <option <?= get_selected('role', 'reception') ?> value="reception">Reception</option>
                     <option <?= get_selected('role', 'lecturer') ?> value="lecturer">Lecturer</option>
                     <option <?= get_selected('role', 'admin') ?> value="admin">Admin</option>
-                    <option <?= get_selected('role', 'super') ?> value="super">Super Admin</option>
+                    <?php if(Auth::user()->role == 'super'): ?>
+                        <option <?= get_selected('role', 'super') ?> value="super">Super Admin</option>
+                    <?php endif;?>
                 </select>
                 <p class="text-danger" ><?= get_error($errors,  'role') ?></p>
                 

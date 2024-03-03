@@ -24,6 +24,10 @@
                         <th>Gender:</th>
                         <td><?= Auth::user()->gender ?></td>
                     </tr>
+                    <tr>
+                        <th>School:</th>
+                        <td><?= $school->school_name ?></td>
+                    </tr>
                 </table>
             </div>
         </div>
