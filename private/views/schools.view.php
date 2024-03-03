@@ -21,6 +21,7 @@
                             <td>
                                 <button class="btn btn-info text-white sms-edit_school_btn" onclick="showEditPopup('edit_<?= $school->school_id ?>')" ><i class="fas fa-edit"></i></button>
                                 <button class="btn btn-danger" onclick="showEditPopup('delete_<?= $school->school_id ?>')" ><i class="fas fa-trash"></i></button>
+                                <button class="btn btn-success" onclick="showEditPopup('switch_<?= $school->school_id ?>')" >Switch Here<i class="fas fa-arrow-right"></i></button>
                                 <!-- Edit School Popup  -->
                                 <div class="sms-edit_school" id="edit_<?= $school->school_id ?>" >
                                     <div class="sms-school_form border shadow p-4">
@@ -39,12 +40,25 @@
                                 <div class="sms-edit_school" id="delete_<?= $school->school_id ?>" >
                                     <div class="sms-school_form border shadow p-4">
                                         <form action="schools/delete" method="post">
-                                            <h3>Are You really want to delete: <br> <?= $school->school_name ?></h3>
+                                            <h3>Are You really want to delete? <br> <?= $school->school_name ?></h3>
 
                                             <input type="hidden" name="id" value="<?= $school->id ?>" >
                                             <input type="submit" value="Delete" class="btn btn-danger mt-4 float-end" >
 
                                             <span class="btn btn-primary mt-4" onclick="hideEditPopup('delete_<?= $school->school_id ?>')" >Cancel</span>
+                                        </form>
+                                    </div>
+                                </div>                                
+                                <!-- Switch School Popup  -->
+                                <div class="sms-edit_school" id="switch_<?= $school->school_id ?>" >
+                                    <div class="sms-school_form border shadow p-4">
+                                        <form action="schools/switch" method="post">
+                                            <h3>Do you want to switch here? <br> <?= $school->school_name ?></h3>
+
+                                            <input type="hidden" name="school_id" value="<?= $school->school_id ?>" >
+                                            <input type="submit" value="Switch" class="btn btn-danger mt-4 float-end" >
+
+                                            <span class="btn btn-primary mt-4" onclick="hideEditPopup('switch_<?= $school->school_id ?>')" >Cancel</span>
                                         </form>
                                     </div>
                                 </div>                                

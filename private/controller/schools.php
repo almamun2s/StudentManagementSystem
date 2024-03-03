@@ -72,4 +72,27 @@ class Schools extends Controller{
 
         }
     }
+
+    public function switch(){
+        if (!Auth::is_logged_in()) {
+            $this->redirect('login');
+        }
+        if (Auth::user()->role != 'super') {
+
+            die('403 unauthorized access');
+
+        }
+        
+        if (count($_POST) > 0) {
+            $user = new User();
+
+            $arr['school_id'] = $_POST['school_id'];
+
+            $user->update(Auth::user()->id, $arr );
+            $_SESSION['user']->school_id = $_POST['school_id'];
+
+            $this->redirect('schools');
+
+        }
+    }
 }

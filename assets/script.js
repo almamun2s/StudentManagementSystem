@@ -11,16 +11,6 @@ addSchoolCancel.addEventListener('click', function(){
 });
 
 
-// // For Editing Schools
-// const editSchoolBtns     = document.querySelectorAll('.sms-edit_school_btn');
-
-// editSchoolBtns.forEach(function(editSchoolBtn){
-//     editSchoolBtn.addEventListener('click', function(){
-//         alert('Hello');
-//         console.log(editSchoolBtn);
-//     });
-// });
-
 function showEditPopup(schoolId) {
     document.getElementById(schoolId).classList.add('sms-add_new_school_show');
 }
