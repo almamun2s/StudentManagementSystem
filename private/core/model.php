@@ -11,19 +11,40 @@ class Model extends Database{
             $this->table = strtolower($this::class) . 's';
         }
     }
+
+    private function afterSelectData($data){
+
+        if (is_array($data)) {
+            if ( property_exists($this, 'afterSelect' )) {
+                foreach ($this->afterSelect as $func) {
+                    $data = $this->$func($data);
+                }
+            }
+        }
+        return $data;
+    }
     public function where( string $column, string|int $value){
 
         $column = addslashes($column);
         $query = 'select * from '. $this->table .' where '.$column.' = :value ';
-        return $this->run($query, [
+        $data = $this->run($query, [
             'value'     => $value
         ]);
+
+        $this->afterSelectData($data);
+
+        return $data;
+
     }
 
     public function findAll(){
 
         $query = 'select * from '. $this->table;
-        return $this->run($query);
+        $data = $this->run($query);
+
+        $this->afterSelectData($data);
+        
+        return $data;
     }
 
     public function insert(array $data){

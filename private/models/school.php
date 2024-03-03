@@ -13,6 +13,9 @@ class School extends Model{
         'make_school_id', 
         'make_date'
     ];
+    protected $afterSelect = [
+        'get_user'
+    ];
 
     public function validate(array $data){
         $this->errors = array();
@@ -47,4 +50,17 @@ class School extends Model{
         return $date;
     }
 
+    public function get_user($data){
+
+
+        $user = new User();
+
+        foreach ($data as $key => $value) {
+            $result = $user->where('user_id', $value->user_id);
+            $data[$key]->user_id = $result[0];
+
+        }
+
+        return $data;
+    }
 }

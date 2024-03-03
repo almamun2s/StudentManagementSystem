@@ -16,8 +16,8 @@
                     <?php foreach ($schools as $school ): ?>
                         <tr>
                             <td><?= $school->school_name ?></td>
-                            <td><?= $school->user_id ?></td>
-                            <td><?= $school->date ?></td>
+                            <td><?= $school->user_id->fname.' '.$school->user_id->lname ?></td>
+                            <td><?= get_date($school->date) ?></td>
                             <td>
                                 <button class="btn btn-info text-white" ><i class="fas fa-edit"></i></button>
                                 <button class="btn btn-danger" ><i class="fas fa-trash"></i></button>
