@@ -8,9 +8,10 @@ class Profile extends Controller{
             $this->redirect('login');
         }
         $presentSchool = $this->findSchoolName(Auth::user()->school_id);
-
-        $this->view('profile',
-            ['school' => $presentSchool]
+        $this->view('profile',[
+            'school' => $presentSchool,
+            'user'  => Auth::user()
+            ]
         );
     }
 
@@ -21,16 +22,19 @@ class Profile extends Controller{
 
     public function visit(string $user_id){
         if ($user_id == Auth::user()->user_id) {
-            $this->index();
-            exit;
+            $this->redirect('profile');
         }
         $user = new User();
         $user = $user->where('user_id', $user_id);
-        $user = $user[0];
+        if ($user) {   
+            $user = $user[0];
+            $presentSchool = $this->findSchoolName($user->school_id);
+        }else{
+            $presentSchool = 'not needed';
+        }
 
-        $presentSchool = $this->findSchoolName($user->school_id);
-        $this->view('otherProfile',
-            ['user' => $user,
+        $this->view('profile',[
+            'user' => $user,
             'school' => $presentSchool
             ]
         );

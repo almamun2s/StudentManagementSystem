@@ -1,5 +1,6 @@
 <?php 
 
+date_default_timezone_set('Asia/Dhaka');
 function get_old_value($key){
     if (isset($_POST[$key])) {
         return $_POST[$key];
@@ -40,5 +41,9 @@ function random_string(int $length){
 
 function get_date($date){
 
-    return date( 'jS M, Y' , strtotime($date));
+    return date( 'jS M, Y h:i:sa' , strtotime($date));
+}
+
+function esc(string $var){
+    return htmlspecialchars($var);
 }
