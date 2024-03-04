@@ -39,7 +39,8 @@
                 <p class="text-danger" ><?= get_error($errors,  'password') ?></p>
 
                 <input name="password2" placeholder="Password" type="text" class="my-4 form-control" autocomplete="off">
-
+                
+                <input type="hidden" name="mode" value="<?= $mode ?>" >
                 <button type="submit" class="btn btn-primary float-end">Add User</button>
                 <button type="button" class="btn btn-danger text-white">Cancel</button>             
             </form>

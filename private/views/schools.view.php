@@ -5,6 +5,7 @@
         <div class="card-group justify-content-center">
             <table class="table table-striped table-hover" >
                 <tr>
+                    <th></th>
                     <th>School</th>
                     <th>Created By</th>
                     <th>Date</th>
@@ -16,6 +17,11 @@
                     <?php foreach ($schools as $school ): ?>
                         <?php $color = $school->school_id == Auth::user()->school_id ? 'bg-primary text-white' : '' ?>
                         <tr class="<?= $color ?>" >
+                            <td>
+                                <button class="btn btn-info text-white" >
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </td>
                             <td><?= $school->school_name ?></td>
                             <td><?= $school->user_id->fname.' '.$school->user_id->lname ?></td>
                             <td><?= get_date($school->date) ?></td>

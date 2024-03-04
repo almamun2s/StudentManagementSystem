@@ -23,7 +23,10 @@ class Signup extends Controller{
                 $arr['date']    = date('Y-m-d h:i:s');
 
                 $user->insert($arr);
-                $this->redirect('users');
+                if ($_POST['mode'] == 'student') {
+                    $this->redirect('users/students');
+                }
+                $this->redirect('users'); 
             }else{
                 $errors = $user->errors;
             }
