@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald&family=Roboto&display=swap');
 
 .sms-nav{
     background-color: #232a5c;
@@ -33,6 +33,10 @@
     text-decoration: none;
     padding: 1rem;
     transition: all 0.3s ease;
+}
+.sms-nav ul li a span{
+    font-family: "Roboto", sans-serif;
+    text-transform: capitalize;
 }
 .sms-nav ul li a.active{
     color: #ff0052;

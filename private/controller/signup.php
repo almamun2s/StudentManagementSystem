@@ -23,7 +23,7 @@ class Signup extends Controller{
                 $arr['date']    = date('Y-m-d h:i:s');
 
                 $user->insert($arr);
-                $this->redirect('login');
+                $this->redirect('users');
             }else{
                 $errors = $user->errors;
             }

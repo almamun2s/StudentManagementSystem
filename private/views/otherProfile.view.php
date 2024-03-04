@@ -14,15 +14,15 @@
                 <table class="table table-hover table-striped table-bordered" >
                     <tr>
                         <th>First Name:</th>
-                        <td><?= Auth::user()->fname ?></td>
+                        <td><?= $user->fname ?></td>
                     </tr>
                     <tr>
                         <th>Last Name:</th>
-                        <td><?= Auth::user()->lname ?></td>
+                        <td><?= $user->lname ?></td>
                     </tr>
                     <tr>
                         <th>Gender:</th>
-                        <td><?= Auth::user()->gender ?></td>
+                        <td><?= $user->gender ?></td>
                     </tr>
                     <tr>
                         <th>School:</th>
@@ -32,7 +32,7 @@
             </div>
         </div>
 
-        <div>
+        <!-- <div>
             <ul class="nav nav-pills">
                 <li class="nav-item">
                     <a class="nav-link active" href="#">Basic Info</a>
@@ -48,10 +48,10 @@
             <nav class="navbar navbar-light bg-light">
                 <form class="form-inline">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </nav>
-        </div>
+        </div> -->
     </div>
     
 <?php $this->view('includes/footer') ?>

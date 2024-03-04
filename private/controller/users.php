@@ -10,7 +10,7 @@
             $this->redirect('login');
         }
         $user = new User();
-        $data = $user->findAll();
+        $data = $user->where('school_id', Auth::user()->school_id );
 
         $this->view('staffs', [
             'users' => $data
