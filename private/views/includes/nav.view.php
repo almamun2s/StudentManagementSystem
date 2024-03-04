@@ -3,7 +3,7 @@
         <li><a href="<?=ROOT?>home">Dashboard</a></li>
         <li><a href="<?=ROOT?>schools">schools</a></li>
         <li><a href="<?=ROOT?>users">staffs</a></li>
-        <li><a href="<?=ROOT?>students">students</a></li>
+        <li><a href="<?=ROOT?>users/students">students</a></li>
         <li><a href="<?=ROOT?>class">Classes</a></li>
         <li><a href="<?=ROOT?>tests" class="active" >Tests</a></li>
     </ul>

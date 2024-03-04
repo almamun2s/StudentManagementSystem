@@ -2,9 +2,15 @@
     <div class="container-fluid p-4 shadow">
         <?php $this->view('includes/b_crumb') ?>
 
-        <div>
-            <a href="signup" class="btn btn-primary" >Add User</a>
-        </div>
+        <nav class="navbar navbar-light bg-light">
+            <form class="form-inline d-flex">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search <?= $mode ?>" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <div>
+                <a href="<?= ROOT ?>signup?mode=<?= $mode ?>" class="btn btn-primary text-capitalize" >Add <?= $mode ?></a>
+            </div>
+        </nav>
         <div class="card-group justify-content-center">
 
             <?php if($users) : ?>
@@ -24,12 +30,12 @@
                         <div class="card-body">
                             <h5 class="card-title"><?= $user->fname.' '.$user->lname ?></h5>
                             <p class="card-text text-capitalize">Role: <?= $user->role ?></p>
-                            <a href="profile/visit/<?= $user->user_id ?>" class="btn btn-primary">Profile</a>
+                            <a href="<?= ROOT ?>profile/visit/<?= $user->user_id ?>" class="btn btn-primary">Profile</a>
                         </div>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
-                <h2>No Staff found</h2>
+                <h2>No <?= $mode ?> found</h2>
             <?php endif; ?>
 
 

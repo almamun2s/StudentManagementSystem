@@ -14,7 +14,8 @@
                 </tr>
                 <?php if($schools) : ?>
                     <?php foreach ($schools as $school ): ?>
-                        <tr>
+                        <?php $color = $school->school_id == Auth::user()->school_id ? 'bg-primary text-white' : '' ?>
+                        <tr class="<?= $color ?>" >
                             <td><?= $school->school_name ?></td>
                             <td><?= $school->user_id->fname.' '.$school->user_id->lname ?></td>
                             <td><?= get_date($school->date) ?></td>
@@ -28,7 +29,7 @@
                                 <div class="sms-edit_school" id="edit_<?= $school->school_id ?>" >
                                     <div class="sms-school_form border shadow p-4">
                                         <form action="schools/edit" method="post">
-                                            <h3>Edit School(<?= $school->school_name ?>)</h3>
+                                            <h3 class="text-dark" >Edit School(<?= $school->school_name ?>)</h3>
 
                                             <input type="hidden" name="id" value="<?= $school->id ?>" >
                                             <input type="text" value="<?= $school->school_name ?>" name="school_name" class="form-control" autofocus placeholder="School Name" >
@@ -42,7 +43,7 @@
                                 <div class="sms-edit_school" id="delete_<?= $school->school_id ?>" >
                                     <div class="sms-school_form border shadow p-4">
                                         <form action="schools/delete" method="post">
-                                            <h3>Are You really want to delete? <br> <?= $school->school_name ?></h3>
+                                            <h3 class="text-dark" >Are You really want to delete? <br> <?= $school->school_name ?></h3>
 
                                             <input type="hidden" name="id" value="<?= $school->id ?>" >
                                             <input type="submit" value="Delete" class="btn btn-danger mt-4 float-end" >
@@ -56,7 +57,7 @@
                                     <div class="sms-edit_school" id="switch_<?= $school->school_id ?>" >
                                         <div class="sms-school_form border shadow p-4">
                                             <form action="schools/switch" method="post">
-                                                <h3>Do you want to switch here? <br> <?= $school->school_name ?></h3>
+                                                <h3 class="text-dark" >Do you want to switch here? <br> <?= $school->school_name ?></h3>
 
                                                 <input type="hidden" name="school_id" value="<?= $school->school_id ?>" >
                                                 <input type="submit" value="Switch" class="btn btn-danger mt-4 float-end" >
