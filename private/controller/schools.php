@@ -95,4 +95,42 @@ class Schools extends Controller{
 
         }
     }
+
+
+    /**
+     * These methods are for classes functionality 
+     */
+    public function class(){
+        if (!Auth::is_logged_in()) {
+            $this->redirect('login');
+        }
+        $classes    = new Classes();
+        $data       = $classes->where('school_id', Auth::user()->school_id );
+
+        $this->view('class', ['classes' => $data]);
+    }
+
+
+    public function classAdd(){
+        if (!Auth::is_logged_in()) {
+            $this->redirect('login');
+        }
+        $errors = array();
+
+        if (count($_POST) > 0) {
+            $class = new Classes();
+            if ($class->validate($_POST)) {
+
+                $arr['class_name']   = $_POST['class_name'];
+
+                $class->insert($arr);
+                $this->redirect('schools/class');
+            }else{
+                $errors = $class->errors;
+                echo '<pre>';
+                var_dump($errors);
+                echo '</pre>';
+            }
+        }
+    }
 }

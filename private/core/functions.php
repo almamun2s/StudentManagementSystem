@@ -47,3 +47,9 @@ function get_date($date){
 function esc(string $var){
     return htmlspecialchars($var);
 }
+
+function get_active_item(string $url){
+    if ( isset($_GET['url']) && ($_GET['url'] == $url) ) {
+        return 'active';
+    }
+}
