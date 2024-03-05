@@ -32,13 +32,27 @@
                                 <button class="btn btn-success" onclick="showEditPopup('switch_<?= $school->school_id ?>')" >Switch Here<i class="fas fa-arrow-right"></i></button>
                                 <?php  endif; ?>
                                 <!-- Edit School Popup  -->
-                                <div class="sms-edit_school" id="edit_<?= $school->school_id ?>" >
+                                <?php
+                                    if ( isset($_POST['id']) && ($_POST['id'] == $school->id) && isset($errors['school_name'])) {
+                                        # code...
+                                        $showEditSchool = 'sms-add_new_school_show';
+                                        $editValue      =  get_old_value('school_name');
+                                        $errorMessage   = get_error($errors, 'school_name');
+                                    }else{
+                                        $showEditSchool = '';
+                                        $editValue      = $school->school_name;
+                                        $errorMessage   = '';
+                                    }
+                                ?>
+                                <div class="sms-edit_school <?= $showEditSchool ?>" id="edit_<?= $school->school_id ?>" >
                                     <div class="sms-school_form border shadow p-4">
-                                        <form action="schools/edit" method="post">
+                                        <form action="<?= ROOT?>schools/edit" method="post">
                                             <h3 class="text-dark" >Edit School(<?= $school->school_name ?>)</h3>
 
                                             <input type="hidden" name="id" value="<?= $school->id ?>" >
-                                            <input type="text" value="<?= $school->school_name ?>" name="school_name" class="form-control" autofocus placeholder="School Name" >
+                                            <input type="text" value="<?= $editValue ?>" name="school_name" class="form-control" autofocus placeholder="School Name" >
+                                            <p class="text-danger" ><?= $errorMessage ?></p>
+
                                             <input type="submit" value="Edit" class="btn btn-primary mt-4 float-end" >
 
                                             <span class="btn btn-danger mt-4" onclick="hideEditPopup('edit_<?= $school->school_id ?>')" >Cancel</span>
@@ -87,11 +101,24 @@
     </div>
     
     <!-- Add New School Popup  -->
-    <div class="sms-add_new_school">
+    <?php
+        if ( !isset($_POST['id']) && isset($errors['school_name'])) {
+            $showAddSchool  = 'sms-add_new_school_show';
+            $addSchoolErr   = get_error($errors , 'school_name');
+            $addSchoolOld   = get_old_value('school_name');
+        }else{
+            $showAddSchool  = '';
+            $addSchoolErr   = '';
+            $addSchoolOld   = '';
+        }
+    ?>
+    <div class="sms-add_new_school <?= $showAddSchool ?>">
         <div class="sms-school_form border shadow p-4">
-            <form action="schools/add" method="post">
+            <form action="<?= ROOT ?>schools/add" method="post">
                 <h3>Add new School</h3>
-                <input type="text" name="school_name" class="form-control" autofocus placeholder="School Name" >
+                <input type="text" name="school_name" class="form-control" autofocus placeholder="School Name" value="<?= $addSchoolOld ?>" >
+                <p class="text-danger" ><?= $addSchoolErr ?></p>
+
                 <input type="submit" value="Create" class="btn btn-primary mt-4 float-end" >
 
                 <span class="btn btn-danger mt-4" id="addNewSchoolCancel" >Cancel</span>

@@ -10,7 +10,10 @@ class Schools extends Controller{
         $school = new School();
         $data   = $school->findAll();
 
-        $this->view('schools', ['schools' => $data]);
+        $this->view('schools', [
+            'schools' => $data,
+            'errors'    => []
+        ]);
     }
 
     public function add(){
@@ -29,11 +32,15 @@ class Schools extends Controller{
                 $this->redirect('schools');
             }else{
                 $errors = $school->errors;
-                echo '<pre>';
-                var_dump($errors);
-                echo '</pre>';
+                $data   = $school->findAll();
             }
         }
+
+        $this->view('schools', [
+            'schools'   => $data,
+            'errors'    => $errors 
+        ]);
+
 
     }
 
@@ -51,12 +58,14 @@ class Schools extends Controller{
                 $school->update($_POST['id'], $arr);
                 $this->redirect('schools');
             }else{
+                $data   = $school->findAll();
                 $errors = $school->errors;
-                echo '<pre>';
-                var_dump($errors);
-                echo '</pre>';
             }
         }
+        $this->view('schools', [
+            'schools'   => $data,
+            'errors'    => $errors 
+        ]);
     }
 
     public function delete(){
@@ -104,11 +113,15 @@ class Schools extends Controller{
         if (!Auth::is_logged_in()) {
             $this->redirect('login');
         }
+        $errors = array();
+
         $classes    = new Classes();
         $data       = $classes->where('school_id', Auth::user()->school_id );
 
-        $this->view('class', ['classes' => $data]);
-    }
+        $this->view('class', [
+            'classes'   => $data,
+            'errors'    => $errors
+        ]);    }
 
 
     public function classAdd(){
@@ -126,11 +139,50 @@ class Schools extends Controller{
                 $class->insert($arr);
                 $this->redirect('schools/class');
             }else{
+                $data       = $class->where('school_id', Auth::user()->school_id );
                 $errors = $class->errors;
-                echo '<pre>';
-                var_dump($errors);
-                echo '</pre>';
             }
+        }
+        $this->view('class', [
+            'classes'   => $data,
+            'errors'    => $errors
+        ]);
+    }
+
+    public function classEdit(){
+        if (!Auth::is_logged_in()) {
+            $this->redirect('login');
+        }
+        $errors = array();
+
+        if (count($_POST) > 0) {
+            $class = new Classes();
+            if ($class->validate($_POST)) {
+                $arr['class_name']   = $_POST['class_name'];
+                $class->update($_POST['id'], $arr);
+                $this->redirect('schools/class');
+            }else{
+                $data   = $class->where('school_id', Auth::user()->school_id );
+                $errors = $class->errors;
+            }
+            $this->view('class', [
+                'classes'   => $data,
+                'errors'    => $errors
+            ]);
+        }
+    }
+
+    public function classDelete(){
+        if (!Auth::is_logged_in()) {
+            $this->redirect('login');
+        }
+        
+        if (count($_POST) > 0) {
+            $classes = new Classes();
+
+            $classes->delete($_POST['id']);
+            $this->redirect('schools/class');
+
         }
     }
 }
