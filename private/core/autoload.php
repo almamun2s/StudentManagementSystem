@@ -1,4 +1,7 @@
 <?php 
+/**
+ * This file loads all the file in core folder and loads models files through auloload function. 
+ */
 
 require_once 'app.php';
 require_once 'functions.php';

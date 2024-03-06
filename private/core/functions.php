@@ -1,4 +1,7 @@
 <?php 
+/**
+ * There have some custom functions in this file  
+ */
 
 // Set the default timezone
 date_default_timezone_set('Asia/Dhaka');

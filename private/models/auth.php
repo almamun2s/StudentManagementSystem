@@ -4,16 +4,28 @@
  */
 
 class Auth{
+    /**
+     * Main Login function
+     * @param array $row
+     */
     public static function authenticate($row){
         $_SESSION['user'] = $row;
     }
 
+    /**
+     * Main Logout function
+     */
     public static function logout(){
         if (isset($_SESSION['user'])) {
             unset($_SESSION['user']);
         }
     }
 
+    /**
+     * Checks if user is logged in or not
+     *
+     * @return boolean
+     */
     public static function is_logged_in(){
         if (isset($_SESSION['user'])) {
             return true;
@@ -21,6 +33,11 @@ class Auth{
         return false;
     }
 
+    /**
+     * Gives logged in user's data
+     *
+     * @return array|string
+     */
     public static function user(){
         if (self::is_logged_in()) {
             return $_SESSION['user'];

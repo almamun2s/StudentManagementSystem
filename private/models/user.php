@@ -5,6 +5,11 @@
 
 class User extends Model{
 
+    /**
+     * These are the column name of table that are allowed for editing or adding data.
+     *
+     * @var array
+     */
     protected $allowedColumn = [
         'fname', 
         'lname', 
@@ -13,6 +18,12 @@ class User extends Model{
         'role',
         'password'
     ];
+
+    /**
+     * Before inserting data to table these function will be called
+     *
+     * @var array
+     */
     protected $beforeInsert = [
         'make_user_id', 
         'make_school_id', 
@@ -20,6 +31,12 @@ class User extends Model{
         'make_date'
     ];
 
+    /**
+     * Validates data for inserting or updating to table
+     *
+     * @param array $data
+     * @return boolean
+     */
     public function validate(array $data){
         $this->errors = array();
 
@@ -78,6 +95,12 @@ class User extends Model{
     }
 
 
+    /**
+     * Creates a user_id by using user's firstname and lastname
+     *
+     * @param array $data
+     * @return array
+     */
     public function make_user_id($data){
         $data['user_id'] = strtolower($data['fname'].'.'.$data['lname']);
         while ($this->where('user_id', $data['user_id']) ) {
@@ -86,6 +109,12 @@ class User extends Model{
         return $data;
     }
 
+    /**
+     * keeps the logged in user's school_id to the table called users 
+     *
+     * @param array $data
+     * @return array
+     */
     public function make_school_id($data){
         if ( isset($_SESSION['user']->school_id )) {
             $data['school_id'] = $_SESSION['user']->school_id;
@@ -93,12 +122,24 @@ class User extends Model{
         return $data;
     }
 
+    /**
+     * Making the password hash
+     *
+     * @param array $data
+     * @return array
+     */
     public function make_hash_password($data){
         
         $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT );
         return $data;
     }
     
+    /**
+     * Creates date for table called users
+     *
+     * @param array $date
+     * @return array
+     */
     public function make_date($date){
         $date['date'] = date('Y-m-d h:i:s');
         return $date;

@@ -15,12 +15,20 @@ class Profile extends Controller{
         );
     }
 
+    /**
+     * This function is for logging out a logged in users  
+     */
     public function logout(){
         Auth::logout();
         $this->redirect('login');
     }
 
-    public function visit(string $user_id){
+    /**
+     * For visiting others profile through profile
+     * @param string $user_id
+     */
+
+    public function visit( $user_id){
         if ($user_id == Auth::user()->user_id) {
             $this->redirect('profile');
         }
@@ -40,6 +48,12 @@ class Profile extends Controller{
         );
     }
 
+    /**
+     * Finging the school name from DataBase 
+     *
+     * @param string|null $school_id
+     * @return object|bool
+     */
     private function findSchoolName(string|null $school_id){
         $presentSchool = (object)array();
         if ( $school_id != null ) {

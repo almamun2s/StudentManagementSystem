@@ -1,4 +1,8 @@
 <?php 
+/**
+ * This if config file that defines some values including DataBase information
+ * 
+ */
 
 define('DBNAME', 'school');
 define('DBHOST', 'localhost');

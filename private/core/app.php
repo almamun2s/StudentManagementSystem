@@ -33,6 +33,12 @@ class App{
 
     }
 
+    /**
+     * This method will return the url through $_GET['url'].
+     * The url is defined in .htaccess file
+     *
+     * @return mixed
+     */
     protected function getURL(){
 
         $url = isset($_GET['url']) ? $_GET['url'] : 'home';

@@ -16,6 +16,9 @@ class Schools extends Controller{
         ]);
     }
 
+    /**
+     * Adding Schools
+     */
     public function add(){
         if (!Auth::is_logged_in()) {
             $this->redirect('login');
@@ -45,6 +48,9 @@ class Schools extends Controller{
     }
 
 
+    /**
+     * Editing school
+     */
     public function edit(){
         if (!Auth::is_logged_in()) {
             $this->redirect('login');
@@ -68,6 +74,9 @@ class Schools extends Controller{
         ]);
     }
 
+    /**
+     * Deleting school 
+     */
     public function delete(){
         if (!Auth::is_logged_in()) {
             $this->redirect('login');
@@ -82,6 +91,9 @@ class Schools extends Controller{
         }
     }
 
+    /**
+     * Switching between schools for super admins
+     */
     public function switch(){
         if (!Auth::is_logged_in()) {
             $this->redirect('login');
@@ -124,6 +136,9 @@ class Schools extends Controller{
         ]);    }
 
 
+    /**
+     * Adding class
+     */
     public function classAdd(){
         if (!Auth::is_logged_in()) {
             $this->redirect('login');
@@ -149,6 +164,9 @@ class Schools extends Controller{
         ]);
     }
 
+    /**
+     * Editing class
+     */
     public function classEdit(){
         if (!Auth::is_logged_in()) {
             $this->redirect('login');
@@ -172,6 +190,9 @@ class Schools extends Controller{
         }
     }
 
+    /**
+     * Delete class
+     */
     public function classDelete(){
         if (!Auth::is_logged_in()) {
             $this->redirect('login');
@@ -186,7 +207,11 @@ class Schools extends Controller{
         }
     }
 
-
+    /**
+     * To view single class
+     *
+     * @param string $class_id
+     */
     public function singleClass(string $class_id){
         $class  = new Classes();
         $class  = $class->where('class_id', $class_id);
