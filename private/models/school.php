@@ -1,5 +1,4 @@
 <?php
-
 /**
  * School model
  */
@@ -92,7 +91,7 @@ class School extends Model{
     }
 
     /**
-     * Gets information of logged in user
+     * Gets information users who own the school
      *
      * @param array $data
      * @return array

@@ -19,8 +19,28 @@
 
         <span class="btn btn-danger mt-4" id="addNewSchoolCancel" >Cancel</span>
         <h3 id="sms-loading" class="text-center d-none" >Loading...</h3>
-        <form action="#" method="post">
+        <form action="<?= ROOT ?>classOperate/selectLecturer" method="post">
+            <input type="hidden" name="class_id" value="<?= $class->class_id ?>" >
             <div class="card-group justify-content-center" id="sms-search_class_lecturers_response" ></div>
         </form>
     </div>
+</div>
+
+
+
+<div class="card-group justify-content-center">
+
+    <?php if($users) : ?>
+        <?php foreach ($users as $user ): ?>
+            <div class="card m-2" style="max-width: 14rem;min-width: 14rem;">
+            <?php 
+                include view_path('includes/singleUser');
+            ?>                    
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <h2>No <?= $mode ?> found</h2>
+    <?php endif; ?>
+
+
 </div>

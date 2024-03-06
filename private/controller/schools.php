@@ -213,18 +213,56 @@ class Schools extends Controller{
      * @param string $class_id
      */
     public function singleClass(string $class_id){
-        $class  = new Classes();
-        $class  = $class->where('class_id', $class_id);
-        $class  = $class[0];
+        if (!Auth::is_logged_in()) {
+            $this->redirect('login');
+        }
+        // Check if the current class is belongs to current school
+        $class    = new Classes();
+        $data     = $class->where('school_id', Auth::user()->school_id );
 
-        $tab = isset($_GET['tab']) ? $_GET['tab'] : 'lecturers';
-        $_GET['select'] = true;
-        $this->view('singleClass', [
-            'class' => $class,
-            'user'  => $class->user_id,
-            'tab'   => $tab,
-            // 'select'=> true 
-        ]);
+        $haveClass = false;
+        if ($data) {   
+            foreach ($data as $singleClass ) {
+                if ($singleClass->class_id == $class_id) {
+                    $haveClass = true;
+                    break;
+                }
+            }
+        }
+        if ($haveClass) {
+            $class  = $class->where('class_id', $class_id);
+            $class  = $class[0];
+
+            $tab = isset($_GET['tab']) ? $_GET['tab'] : 'lecturers';
+            $_GET['select'] = true;
+
+            if ($tab == 'lecturers') {
+                $class_lecturers = new Class_details('lecturers');
+                $class_lecturers = $class_lecturers->where('class_id', $class_id);
+
+                $allUsers = [];
+                $users = new User();
+                foreach ($class_lecturers as $class_lecturer) {
+                    $user = $users->where('user_id', $class_lecturer->user_id);
+
+                    $allUsers = array_merge($allUsers, $user);
+                }
+
+
+            }
+            $this->view('singleClass', [
+                'class' => $class,
+                'user'  => $class->user_id,
+                'tab'   => $tab,
+                'users' => $allUsers
+            ]);
+        }else{
+            $this->view('singleClass', [
+                'class' => false,
+            ]);
+        }
+
+
     }
 
     /**
@@ -242,7 +280,7 @@ class Schools extends Controller{
                 $users = $user->run('select * from users where role != :role and school_id = :school_id and (fname like :fname  or lname like :lname) ', [ 'role' => 'student', 'school_id' => Auth::user()->school_id , 'fname' => '%'.$search.'%', 'lname' => '%'.$search.'%' ] );
                 
                 if($users){
-                    echo '<h4 style="width:100%;text-align:center;">Click on a lecturer to add in this class.</h4>';
+                    echo '<h4 style="width:100%;text-align:center;">Click select lecturer to add in this class.</h4>';
                         foreach ($users as $user) {
                             echo '<div class="card m-2" style="max-width: 14rem;min-width: 14rem;">';
                             include view_path('includes/singleUser');
