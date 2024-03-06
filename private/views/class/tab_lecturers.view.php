@@ -19,7 +19,8 @@
 
         <span class="btn btn-danger mt-4" id="addNewSchoolCancel" >Cancel</span>
         <h3 id="sms-loading" class="text-center d-none" >Loading...</h3>
-        <div class="card-group justify-content-center" id="sms-search_class_lecturers_response" ></div>
-
+        <form action="#" method="post">
+            <div class="card-group justify-content-center" id="sms-search_class_lecturers_response" ></div>
+        </form>
     </div>
 </div>
