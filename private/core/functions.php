@@ -114,3 +114,16 @@ function get_active_tab(string $thisTab, string $currentTab ){
     }
     return '';
 }
+
+/**
+ * This returns the full path of view file.
+ * @param string $view Write only the file name.
+ * @return string 
+ */
+function view_path($view){
+    if (file_exists('private/views/'.$view.'.view.php')) {
+        return 'private/views/'.$view.'.view.php';
+    }else {
+        return 'private/views/404.view.php';
+    }
+}

@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald&family=Roboto&display=swap');
-
+img{
+    max-width: 100%;
+}
 .sms-nav{
     background-color: #232a5c;
     display: flex;

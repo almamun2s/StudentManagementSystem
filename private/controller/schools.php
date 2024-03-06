@@ -224,4 +224,36 @@ class Schools extends Controller{
             'tab'   => $tab
         ]);
     }
+
+    /**
+     * This function handles some AJAX request
+     *
+     */
+    public function searchLecturers(){
+        if (count($_POST) > 0) {
+            $search = $_POST['search'];
+            if (!empty($search)) {
+                
+                
+                $user = new User();
+                $users = $user->run('select * from users where role != :role and school_id = :school_id and (fname like :fname  or lname like :lname) ', [ 'role' => 'student', 'school_id' => Auth::user()->school_id , 'fname' => '%'.$search.'%', 'lname' => '%'.$search.'%' ] );
+                
+                if($users){
+                    foreach ($users as $user) {
+                        echo '<a href="#" class="text-dark btn" style="" >';
+                        echo '<div class="card m-2" style="max-width: 14rem;min-width: 14rem;">';
+                        include view_path('includes/singleUser');
+                        echo '</div>';
+                        echo '</a>';
+                    }
+                }else{
+                    echo '<h2>No lecturer found</h2>';
+                }
+            }else{
+                echo '<h2>Please type something to search</h2>';
+            }
+        }else{
+            echo 'Hello. No data faund by $_POST  ';
+        }
+    }
 }

@@ -8,6 +8,8 @@
         </footer>
     </div>
     <script src="<?=ROOT?>assets/bootstrap.min.js"></script>
+    <script src="<?=ROOT?>assets/jquery.min.js"></script>
+    <script src="<?=ROOT?>assets/ajax.js"></script>
     <script src="<?=ROOT?>assets/script.js"></script>
 </body>
 </html>

@@ -17,3 +17,9 @@ function showEditPopup(schoolId) {
 function hideEditPopup(schoolId) {
     document.getElementById(schoolId).classList.remove('sms-add_new_school_show');
 }
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === "Escape") {
+        addSchoolPopup.classList.remove('sms-add_new_school_show');
+    }
+});

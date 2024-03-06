@@ -46,19 +46,15 @@
             <?php 
                 switch ($tab) {
                     case 'lecturers':
-                        $this->view('class/tab_lecturers');
+                        include view_path('class/tab_lecturers');
                         break;
-                    
                     case 'students':
-                        $this->view('class/tab_students');
+                        include view_path('class/tab_students');
                         break;
-                    
                     case 'tests':
-                        $this->view('class/tab_tests');
+                        include view_path('class/tab_tests');
                         break;
-                    
                     default:
-                        
                         break;
                 }
             ?>
