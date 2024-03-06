@@ -41,6 +41,10 @@
                             <td><?= esc($school->school_name) ?></td>
                         </tr>
                         <tr>
+                            <th>Position:</th>
+                            <td><?= esc($user->role) ?></td>
+                        </tr>
+                        <tr>
                             <th>Created at:</th>
                             <td><?= get_date($user->date) ?></td>
                         </tr>

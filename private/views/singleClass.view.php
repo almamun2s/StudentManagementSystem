@@ -37,12 +37,25 @@
                     </li>
                 </ul>
 
-                <nav class="navbar navbar-light bg-light">
-                    <form class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
-                    </form>
-                </nav>
+            <?php 
+                switch ($tab) {
+                    case 'lecturers':
+                        $this->view('class/tab_lecturers');
+                        break;
+                    
+                    case 'students':
+                        $this->view('class/tab_students');
+                        break;
+                    
+                    case 'tests':
+                        $this->view('class/tab_tests');
+                        break;
+                    
+                    default:
+                        
+                        break;
+                }
+            ?>
             </div>
         <?php else:?>
             <h2 class="text-center" >The class you are looking for was not found</h2>
