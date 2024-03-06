@@ -1,3 +1,8 @@
+<?php 
+    /**
+     * This is header nav file 
+     */
+?>
 <nav class="sms-nav" >
     <ul>
         <li><a class="<?= get_active_item('home') ?>" href="<?=ROOT?>home">Dashboard</a></li>

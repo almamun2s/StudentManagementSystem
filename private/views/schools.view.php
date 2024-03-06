@@ -1,3 +1,9 @@
+<?php 
+    /**
+     * This is school file 
+     * All school are shown through this file
+     */
+?>
 <?php $this->view('includes/header') ?>
     <div class="container-fluid p-4 shadow">
         <?php $this->view('includes/b_crumb') ?>

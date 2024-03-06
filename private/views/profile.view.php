@@ -1,3 +1,8 @@
+<?php 
+    /**
+     * This is profile file 
+     */
+?>
 <?php $this->view('includes/header') ?>
 <style>
     td{

@@ -1,3 +1,8 @@
+<?php 
+    /**
+     * This is 404 file 
+     */
+?>
 <?php $this->view('includes/header') ?>
     <div class="container-fluid">
         <h1><i class="fas fa-xmark"></i>Page Not found</h1>

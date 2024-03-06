@@ -1,3 +1,8 @@
+<?php 
+    /**
+     * This is add student file for class 
+     */
+?>
 <nav class="navbar navbar-light bg-light">
     <form class="form-inline d-flex">
         <input class="form-control mr-sm-2" type="search" placeholder="Search Students" aria-label="Search">

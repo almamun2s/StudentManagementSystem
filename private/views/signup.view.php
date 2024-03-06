@@ -1,3 +1,8 @@
+<?php 
+    /**
+     * This is signup file 
+     */
+?>
 <?php $this->view('includes/header') ?>
     <div class="container-fluid">
         <div class="p-4 mt-4 mx-auto rounded shadow" style="width:100%;max-width: 325px;">

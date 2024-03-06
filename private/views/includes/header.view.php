@@ -1,3 +1,8 @@
+<?php 
+    /**
+     * This is main header file 
+     */
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

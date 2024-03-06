@@ -1,3 +1,8 @@
+<?php 
+    /**
+     * This is Staff file 
+     */
+?>
 <?php $this->view('includes/header') ?>
     <div class="container-fluid p-4 shadow">
         <?php $this->view('includes/b_crumb') ?>

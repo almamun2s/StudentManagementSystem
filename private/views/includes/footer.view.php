@@ -1,3 +1,8 @@
+<?php 
+    /**
+     * This is main footer file 
+     */
+?>
         <footer class="bg-secondary mt-4" >
             <p class="text-center text-white p-2" >All &copy; right resorved by Student Management System. Developed by Abdullah Almamun</p>
         </footer>
