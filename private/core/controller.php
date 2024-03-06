@@ -4,7 +4,7 @@
  * Main Controller
  */
 class Controller{
-    protected function view($view, $data = array()){
+    protected function view( string $view, array $data = array()){
         extract($data);
         
         if (file_exists('private/views/'.$view.'.view.php')) {

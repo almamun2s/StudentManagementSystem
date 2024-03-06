@@ -37,9 +37,9 @@ class Model extends Database{
 
     }
 
-    public function findAll(){
+    public function findAll(string $order = 'asc'){
 
-        $query = 'select * from '. $this->table;
+        $query = 'select * from '. $this->table . ' order by id ' . $order ;
         $data = $this->run($query);
 
         $this->afterSelectData($data);

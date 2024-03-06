@@ -185,4 +185,18 @@ class Schools extends Controller{
 
         }
     }
+
+
+    public function singleClass(string $class_id){
+        $class  = new Classes();
+        $class  = $class->where('class_id', $class_id);
+        $class  = $class[0];
+
+        $tab = isset($_GET['tab']) ? $_GET['tab'] : 'lecturers';
+        $this->view('singleClass', [
+            'class' => $class,
+            'user'  => $class->user_id,
+            'tab'   => $tab
+        ]);
+    }
 }

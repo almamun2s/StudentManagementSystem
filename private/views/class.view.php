@@ -18,9 +18,9 @@
                         <?php // $color = $class->class_id == Auth::user()->class_id ? 'bg-primary text-white' : '' ?>
                         <tr class="<?php // $color ?>" >
                             <td>
-                                <button class="btn btn-info text-white" >
+                                <a href="<?= ROOT ?>schools/singleClass/<?= $class->class_id ?>" class="btn btn-info text-white" >
                                     <i class="fas fa-chevron-right"></i>
-                                </button>
+                                </a>
                             </td>
                             <td><?= $class->class_name ?></td>
                             <td><?= $class->user_id->fname.' '.$class->user_id->lname ?></td>

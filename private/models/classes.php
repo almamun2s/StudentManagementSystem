@@ -26,8 +26,8 @@ class Classes extends Model{
         // Check Class name 
         if ( empty($data['class_name']) ) {
             $this->errors['class_name'] = 'Class Name cannot be empty';
-        }elseif ( !preg_match('/^[a-zA-Z]+$/', $data['class_name'] ) ) {
-            $this->errors['class_name'] = 'Only letters are allowed';
+        }elseif ( !preg_match('/^[a-zA-Z0-9 ]+$/', $data['class_name'] ) ) {
+            $this->errors['class_name'] = 'Only letters and numbers are allowed';
         }
 
         if (count($this->errors) == 0 ) {

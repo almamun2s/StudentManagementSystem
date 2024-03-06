@@ -53,3 +53,9 @@ function get_active_item(string $url){
         return 'active';
     }
 }
+
+function get_active_tab(string $thisTab, string $currentTab ){
+    if ($thisTab == $currentTab) {
+        return 'active';
+    }
+}
