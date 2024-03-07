@@ -60,22 +60,30 @@
                 <div>
                     <ul class="nav nav-pills">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">Basic Info</a>
+                            <a class="nav-link <?= get_active_tab( 'info', $tab ) ?>" href="<?= ROOT ?>profile?tab=info">Basic Info</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Classes</a>
+                            <a class="nav-link <?= get_active_tab( 'class', $tab ) ?>" href="<?= ROOT ?>profile?tab=class">Classes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Tests</a>
+                            <a class="nav-link <?= get_active_tab( 'test', $tab ) ?>" href="<?= ROOT ?>profile?tab=test">Tests</a>
                         </li>
                     </ul>
-
-                    <nav class="navbar navbar-light bg-light">
-                        <form class="form-inline">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                            <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
-                        </form>
-                    </nav>
+                    <?php 
+                        switch ($tab) {
+                            case 'info':
+                                include view_path('profile/tab_info');
+                                break;
+                            case 'class':
+                                include view_path('profile/tab_class');
+                                break;
+                            case 'test':
+                                include view_path('profile/tab_test');
+                                break;
+                            default:
+                                break;
+                        }
+                    ?>
                 </div>
             <?php endif; ?>
         <?php else:?>

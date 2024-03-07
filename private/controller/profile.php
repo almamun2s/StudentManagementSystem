@@ -8,9 +8,24 @@ class Profile extends Controller{
             $this->redirect('login');
         }
         $presentSchool = $this->findSchoolName(Auth::user()->school_id);
+        $tab = isset($_GET['tab']) ? $_GET['tab'] : 'info';
+        $allClass = [];
+        if ($tab == 'class') {
+            $classes = new Class_details('students');
+            $classes = $classes->where('user_id', Auth::user()->user_id );
+            if ($classes) {
+                foreach ($classes as $class) {
+                    $singleClass = new Classes();
+                    $singleClass = $singleClass->where('class_id', $class->class_id );
+                    $allClass = array_merge($allClass , $singleClass );
+                }
+            }
+        }
         $this->view('profile',[
-            'school' => $presentSchool,
-            'user'  => Auth::user()
+            'school'    => $presentSchool,
+            'user'      => Auth::user(),
+            'tab'       => $tab ,
+            'classes'   => $allClass
             ]
         );
     }

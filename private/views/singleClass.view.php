@@ -37,21 +37,21 @@
                     </li>
                 </ul>
 
-            <?php 
-                switch ($tab) {
-                    case 'lecturers':
-                        include view_path('class/tab_lecturers');
-                        break;
-                    case 'students':
-                        include view_path('class/tab_students');
-                        break;
-                    case 'tests':
-                        include view_path('class/tab_tests');
-                        break;
-                    default:
-                        break;
-                }
-            ?>
+                <?php 
+                    switch ($tab) {
+                        case 'lecturers':
+                            include view_path('class/tab_lecturers');
+                            break;
+                        case 'students':
+                            include view_path('class/tab_students');
+                            break;
+                        case 'tests':
+                            include view_path('class/tab_tests');
+                            break;
+                        default:
+                            break;
+                    }
+                ?>
             </div>
         <?php else:?>
             <?php $this->redirect('errors') ?>
