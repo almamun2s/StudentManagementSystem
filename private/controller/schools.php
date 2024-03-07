@@ -242,10 +242,12 @@ class Schools extends Controller{
 
                 $allUsers = [];
                 $users = new User();
-                foreach ($class_lecturers as $class_lecturer) {
-                    $user = $users->where('user_id', $class_lecturer->user_id);
-
-                    $allUsers = array_merge($allUsers, $user);
+                if ($class_lecturers) {   
+                    foreach ($class_lecturers as $class_lecturer) {
+                        $user = $users->where('user_id', $class_lecturer->user_id);
+                        
+                        $allUsers = array_merge($allUsers, $user);
+                    }
                 }
 
 

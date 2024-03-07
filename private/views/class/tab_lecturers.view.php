@@ -28,19 +28,27 @@
 
 
 
-<div class="card-group justify-content-center">
+<form action="<?= ROOT ?>classOperate/removeLecturer" method="post" id="sms-show_lecturer_form" >
+    <input type="hidden" name="class_id" value="<?= $class->class_id ?>" >
+    <div class="card-group justify-content-center">
+        <?php if($users) : ?>
+            <?php foreach ($users as $user ): ?>
+                <div class="card m-2" style="max-width: 14rem;min-width: 14rem;">
+                    <?php include view_path('includes/singleUser'); ?>                    
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <h2>No Lecturers found</h2>
+        <?php endif; ?> 
+    </div>
+</form>
+<script>
+    const showLecturerForm  = document.getElementById('sms-show_lecturer_form');
+    const userSelectBtn     = showLecturerForm.querySelectorAll('.sms-user_select_btn');
 
-    <?php if($users) : ?>
-        <?php foreach ($users as $user ): ?>
-            <div class="card m-2" style="max-width: 14rem;min-width: 14rem;">
-            <?php 
-                include view_path('includes/singleUser');
-            ?>                    
-            </div>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <h2>No <?= $mode ?> found</h2>
-    <?php endif; ?>
-
-
-</div>
+    userSelectBtn.forEach(element => {
+        element.innerHTML = 'Remove';
+        element.classList.remove('btn-success');
+        element.classList.add('btn-danger');
+    });
+</script>

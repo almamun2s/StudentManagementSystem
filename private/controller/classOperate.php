@@ -52,5 +52,22 @@
 
         }
     }
+
+    /**
+     * Removes lecturers information to class_lecturers table
+     *
+     */
+    public function removeLecturer(){
+        // echo '<pre>';
+        // var_dump($_POST);
+        // echo '</pre>';
+
+        $user_id    = $_POST['user_id'];
+        $class_id   = $_POST['class_id'];
+
+        $class_details = new Class_details('lecturers');
+        $class_details->run('delete from class_lecturers where class_id = :class_id and user_id = :user_id', ['user_id' => $user_id, 'class_id' => $class_id ] );
+        $this->redirect('schools/singleClass/'.$class_id);
+    }
     
  }

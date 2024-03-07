@@ -17,6 +17,6 @@
     <p class="card-text text-capitalize">Role: <?= $user->role ?></p>
     <a href="<?= ROOT ?>profile/visit/<?= $user->user_id ?>" class="btn btn-primary">Profile</a>
     <?php if (in_array('search', $_GET)) : ?>
-        <button type="submit" class="btn btn-success float-end" name="user_id" value="<?= $user->user_id ?>" >Select</button>
+        <button type="submit" class="btn btn-success float-end sms-user_select_btn" name="user_id" value="<?= $user->user_id ?>" >Select</button>
     <?php endif;?>
 </div>
