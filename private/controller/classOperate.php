@@ -21,8 +21,6 @@
             $user = new User();
             $user = $user->where('user_id', $user_id)[0];
 
-
-
             // // Check if the current user is belongs to current class
             $class    = new Classes();
             $data     = $class->where('school_id', $user->school_id );
@@ -43,8 +41,14 @@
                 $arr['user_id']     = $user_id;
                 $arr['class_id']    = $class_id;
 
-                $class_details->insert($arr);
-                $this->redirect('schools/singleClass/'.$class_id);
+                $checkLect  = $class_details->run('select * from class_lecturers where user_id = :user_id and class_id = :class_id ', $arr );
+
+                if ( !$checkLect) {
+                    $class_details->insert($arr);
+                    $this->redirect('schools/singleClass/'.$class_id);
+                }else {
+                    die('403 User is already in the class ');
+                }
 
             }else{
                 die('403 Unauthorized access');
@@ -58,10 +62,6 @@
      *
      */
     public function removeLecturer(){
-        // echo '<pre>';
-        // var_dump($_POST);
-        // echo '</pre>';
-
         $user_id    = $_POST['user_id'];
         $class_id   = $_POST['class_id'];
 
