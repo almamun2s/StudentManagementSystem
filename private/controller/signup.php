@@ -5,9 +5,6 @@
 class Signup extends Controller{
     public function index(){
 
-        // if (Auth::is_logged_in()) {
-        //     $this->redirect('profile');
-        // }
         $errors = array();
 
         if (count($_POST) > 0) {

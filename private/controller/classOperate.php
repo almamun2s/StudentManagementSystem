@@ -57,11 +57,11 @@
                     $class_details->insert($arr);
                     $this->redirect('schools/singleClass/'.$class_id.'?tab='.$tab);
                 }else {
-                    die('403 '.$selectLecturerType.' is already in the class ');
+                    $this->redirect('errors/403');
                 }
 
             }else{
-                die('403 Unauthorized access');
+                $this->redirect('errors/403');
             }
 
         }
@@ -84,7 +84,7 @@
             $table_name = 'class_students';
             $tab = 'students';
         }else{
-            die('Something went wrong in '. __FILE__ .' at line '. __LINE__ );
+            $this->redirect('errors/403');
         }
 
 

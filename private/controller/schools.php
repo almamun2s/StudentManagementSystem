@@ -99,9 +99,7 @@ class Schools extends Controller{
             $this->redirect('login');
         }
         if (Auth::user()->role != 'super') {
-
-            die('403 unauthorized access');
-
+            $this->redirect('errors/403');
         }
         
         if (count($_POST) > 0) {
@@ -299,7 +297,7 @@ class Schools extends Controller{
                 }elseif ($user_type == 'student') {
                     $operator = '=';
                 }else{
-                    die('Something went wrong in '. __FILE__ .' at line '. __LINE__ );
+                    $this->redirect('errors/403');
                 }
                 $user = new User();
                 $users = $user->run("select * from users where role $operator :role and school_id = :school_id and (fname like :fname  or lname like :lname)  limit 6", [ 'role' => 'student', 'school_id' => Auth::user()->school_id , 'fname' => '%'.$search.'%', 'lname' => '%'.$search.'%' ] );

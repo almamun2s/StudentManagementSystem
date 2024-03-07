@@ -79,7 +79,7 @@
                 </div>
             <?php endif; ?>
         <?php else:?>
-            <h2 class="text-center" >The user you are looking for was not found</h2>
+            <?php $this->redirect('errors') ?>
         <?php endif;?>
     </div>
     

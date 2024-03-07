@@ -1,8 +1,29 @@
 <?php 
 class App{
+    /**
+     * Default Controller
+     *
+     * @var string
+     */
     protected $controller = 'home';
+
+    /**
+     * Default method
+     *
+     * @var string
+     */
     protected $method = 'index';
+
+    /**
+     * Parameters in methods
+     *
+     * @var array
+     */
     protected $params =  array();
+
+    /**
+     * App construct function
+     */
     public function __construct(){
         $URL = $this->getURL();
 
@@ -11,11 +32,15 @@ class App{
         if (file_exists($controllerFile)) {
             $this->controller = $URL[0];
             unset($URL[0]);
-        }
-        // Include the controller file 
-        require_once "private/controller/$this->controller.php";
-        $this->controller = new $this->controller;
 
+            // Include the controller file 
+            require_once "private/controller/$this->controller.php";
+            $this->controller = new $this->controller;
+
+        }else {
+            header('location:'.ROOT.'errors');
+            exit;
+        }
 
         // Put the second item of the url as method of the controller
         if (isset($URL[1])) {
