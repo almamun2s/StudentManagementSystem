@@ -8,9 +8,9 @@
 
     /**
      * Inserts lecturers information to class_lecturers table
-     *
+     * @param string $selectLecturerType
      */
-    public function selectLecturer(){
+    public function selectLecturer( $selectLecturerType ){
         if (!Auth::is_logged_in()) {
             $this->redirect('login');
         }
@@ -36,18 +36,28 @@
             }
 
             if ($haveClass) {
-                $class_details = new Class_details('lecturers');
+                if ($selectLecturerType == 'lecturer') {
+                    $class_details = new Class_details('lecturers');
+                    $table_name = 'class_lecturers';
+                    $tab = 'lecturers';
+                }elseif ($selectLecturerType == 'student') {
+                    $class_details = new Class_details('students');
+                    $table_name = 'class_students';
+                    $tab = 'students';
+                }else{
+                    die('Something went wrong in '. __FILE__ .' at line '. __LINE__ );
+                }
 
                 $arr['user_id']     = $user_id;
                 $arr['class_id']    = $class_id;
 
-                $checkLect  = $class_details->run('select * from class_lecturers where user_id = :user_id and class_id = :class_id ', $arr );
+                $checkLect  = $class_details->run("select * from  $table_name  where user_id = :user_id and class_id = :class_id ", $arr );
 
                 if ( !$checkLect) {
                     $class_details->insert($arr);
-                    $this->redirect('schools/singleClass/'.$class_id);
+                    $this->redirect('schools/singleClass/'.$class_id.'?tab='.$tab);
                 }else {
-                    die('403 User is already in the class ');
+                    die('403 '.$selectLecturerType.' is already in the class ');
                 }
 
             }else{
@@ -59,15 +69,27 @@
 
     /**
      * Removes lecturers information to class_lecturers table
-     *
+     * @param string $removeUserType
      */
-    public function removeLecturer(){
+    public function removeLecturer( $removeUserType ){
         $user_id    = $_POST['user_id'];
         $class_id   = $_POST['class_id'];
 
-        $class_details = new Class_details('lecturers');
-        $class_details->run('delete from class_lecturers where class_id = :class_id and user_id = :user_id', ['user_id' => $user_id, 'class_id' => $class_id ] );
-        $this->redirect('schools/singleClass/'.$class_id);
+        if ( $removeUserType == 'lecturer' ) {
+            $class_details = new Class_details('lecturers');
+            $table_name = 'class_lecturers';
+            $tab = 'lecturers';
+        }elseif( $removeUserType == 'student' ) {
+            $class_details = new Class_details('students');
+            $table_name = 'class_students';
+            $tab = 'students';
+        }else{
+            die('Something went wrong in '. __FILE__ .' at line '. __LINE__ );
+        }
+
+
+        $class_details->run("delete from  $table_name  where class_id = :class_id and user_id = :user_id", ['user_id' => $user_id, 'class_id' => $class_id ] );
+        $this->redirect('schools/singleClass/'.$class_id.'?tab='.$tab);
     }
     
  }

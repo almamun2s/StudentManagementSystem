@@ -15,11 +15,12 @@
 <div class="sms-add_new_school " style="align-items: flex-start;" >
     <div class="sms-school_form border shadow p-4" style="width: 50%;" >
         <h3 class="text-center" >Add Lecturer</h3>
+        <input type="hidden" value="lecturer" id="sms-class_user_type" >
         <input type="text" class="form-control" autofocus placeholder="Type Lecturer Name to add" id="sms-search_class_lecturers" >
 
         <span class="btn btn-danger mt-4" id="addNewSchoolCancel" >Cancel</span>
         <h3 id="sms-loading" class="text-center d-none" >Loading...</h3>
-        <form action="<?= ROOT ?>classOperate/selectLecturer" method="post">
+        <form action="<?= ROOT ?>classOperate/selectLecturer/lecturer" method="post">
             <input type="hidden" name="class_id" value="<?= $class->class_id ?>" >
             <div class="card-group justify-content-center" id="sms-search_class_lecturers_response" ></div>
         </form>
@@ -28,7 +29,7 @@
 
 
 
-<form action="<?= ROOT ?>classOperate/removeLecturer" method="post" id="sms-show_lecturer_form" >
+<form action="<?= ROOT ?>classOperate/removeLecturer/lecturer" method="post" id="sms-show_lecturer_form" >
     <input type="hidden" name="class_id" value="<?= $class->class_id ?>" >
     <div class="card-group justify-content-center">
         <?php if($users) : ?>

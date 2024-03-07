@@ -17,14 +17,8 @@
                 <h3 class="text-center" ><?= esc($class->class_name) ?></h3>
                 <table class="table table-hover table-striped table-bordered" >
                     <tr>
-                        <th>Class Name:</th>
-                        <td><?= esc($class->class_name) ?></td>
-                    </tr>
-                    <tr>
                         <th>Created by:</th>
                         <td><?= esc($user->fname).' '.esc($user->lname) ?></td>
-                    </tr>
-                    <tr>
                         <th>Created at:</th>
                         <td><?= get_date($class->date) ?></td>
                     </tr>

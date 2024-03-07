@@ -2,10 +2,12 @@ jQuery(document).ready(function($) {
 
     $('#sms-search_class_lecturers').keyup( function(){
         const searchedValue = $('#sms-search_class_lecturers').val();
+        const userType      = $('#sms-class_user_type').val();
         const loading       = $('#sms-loading');
 
         var requestData = {
             search: searchedValue,
+            userType: userType
         };
 
 

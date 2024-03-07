@@ -251,7 +251,22 @@ class Schools extends Controller{
                 }
 
 
+            }elseif ($tab == 'students') {
+                $class_lecturers = new Class_details('students');
+                $class_lecturers = $class_lecturers->where('class_id', $class_id);
+
+                $allUsers = [];
+                $users = new User();
+                if ($class_lecturers) {   
+                    foreach ($class_lecturers as $class_lecturer) {
+                        $user = $users->where('user_id', $class_lecturer->user_id);
+                        
+                        $allUsers = array_merge($allUsers, $user);
+                    }
+                }
             }
+
+
             $this->view('singleClass', [
                 'class' => $class,
                 'user'  => $class->user_id,
@@ -273,21 +288,29 @@ class Schools extends Controller{
      */
     public function searchLecturers(){
         if (count($_POST) > 0) {
-            $search = trim($_POST['search']);
+            $search         = trim($_POST['search']);
+            $user_type      = $_POST['userType'];
             $_GET['select'] = true;
 
             if (!empty($search)) {
                 
+                if ($user_type == 'lecturer') {
+                    $operator = '!=';
+                }elseif ($user_type == 'student') {
+                    $operator = '=';
+                }else{
+                    die('Something went wrong in '. __FILE__ .' at line '. __LINE__ );
+                }
                 $user = new User();
-                $users = $user->run('select * from users where role != :role and school_id = :school_id and (fname like :fname  or lname like :lname) ', [ 'role' => 'student', 'school_id' => Auth::user()->school_id , 'fname' => '%'.$search.'%', 'lname' => '%'.$search.'%' ] );
+                $users = $user->run("select * from users where role $operator :role and school_id = :school_id and (fname like :fname  or lname like :lname)  limit 6", [ 'role' => 'student', 'school_id' => Auth::user()->school_id , 'fname' => '%'.$search.'%', 'lname' => '%'.$search.'%' ] );
                 
                 if($users){
                     echo '<h4 style="width:100%;text-align:center;">Click select lecturer to add in this class.</h4>';
-                        foreach ($users as $user) {
-                            echo '<div class="card m-2" style="max-width: 14rem;min-width: 14rem;">';
-                            include view_path('includes/singleUser');
-                            echo '</div>';
-                        }
+                    foreach ($users as $user) {
+                        echo '<div class="card m-2" style="max-width: 14rem;min-width: 14rem;">';
+                        include view_path('includes/singleUser');
+                        echo '</div>';
+                    }
                 }else{
                     echo '<h2>No lecturer found</h2>';
                 }
