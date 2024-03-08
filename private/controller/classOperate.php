@@ -14,6 +14,9 @@
         if (!Auth::is_logged_in()) {
             $this->redirect('login');
         }
+        if (!Auth::access('reception')) {
+            $this->redirect('errors/403');
+        }
         if ( count($_POST) > 0 ) {
             $user_id    = $_POST['user_id'];
             $class_id   = $_POST['class_id'];
@@ -72,6 +75,13 @@
      * @param string $removeUserType
      */
     public function removeLecturer( $removeUserType ){
+        if (!Auth::is_logged_in()) {
+            $this->redirect('login');
+        }
+        if (!Auth::access('reception')) {
+            $this->redirect('errors/403');
+        }
+        
         $user_id    = $_POST['user_id'];
         $class_id   = $_POST['class_id'];
 

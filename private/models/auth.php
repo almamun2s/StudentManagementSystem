@@ -58,10 +58,10 @@ class Auth{
             return false;
         }
         
-        $RANK['super']      = ['super', 'admin', 'lecturer', 'reception', 'student'];
-        $RANK['admin']      = ['admin', 'lecturer', 'reception', 'student'];
-        $RANK['lecturer']   = ['lecturer', 'reception', 'student'];
-        $RANK['reception']  = ['reception', 'student'];
+        $RANK['super']      = ['super', 'admin', 'reception', 'lecturer', 'student'];
+        $RANK['admin']      = ['admin', 'reception', 'lecturer', 'student'];
+        $RANK['reception']  = ['reception', 'lecturer', 'student'];
+        $RANK['lecturer']   = ['lecturer', 'student'];
         $RANK['student']    = ['student'];
 
         if (!isset($RANK[self::user()->role])) {

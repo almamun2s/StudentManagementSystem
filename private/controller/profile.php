@@ -4,15 +4,23 @@
  */
 class Profile extends Controller{
     public function index( $user_id = '' ){
+        $tab = isset($_GET['tab']) ? $_GET['tab'] : 'info';
         if (!Auth::is_logged_in()) {
+            // if user is not logged in 
             $this->redirect('login');
         }
         if ($user_id == '') {
+            // If user visits his/her own profile
             $user = Auth::user();
+        }elseif($user_id == Auth::user()->user_id ){
+            // If user visits his/her own profile but with user_id 
+            $this->redirect('profile?tab='. $tab);
         }else{
+            // If user visits others profile
             $user = new User();
             $user = $user->where('user_id', $user_id);
             if (!$user) {
+                // If user gives wrong user_id 
                 $this->redirect('error');
             }else{
                 $user = $user[0];
@@ -20,15 +28,12 @@ class Profile extends Controller{
         }
         $presentSchool = $this->findSchoolName($user->school_id);
 
-        $tab = isset($_GET['tab']) ? $_GET['tab'] : 'info';
         $allClass = [];
         if ($tab == 'class') {
             if ($user->role == 'student') {
                 $classes = new Class_details('students');
-            }elseif ($user->role == 'lecturer') {
-                $classes = new Class_details('lecturers');
             }else{
-                $this->redirect('errors/403');
+                $classes = new Class_details('lecturers');
             }
             $classes = $classes->where('user_id', $user->user_id );
             if ($classes) {

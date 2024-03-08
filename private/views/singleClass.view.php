@@ -18,7 +18,7 @@
                 <table class="table table-hover table-striped table-bordered" >
                     <tr>
                         <th>Created by:</th>
-                        <td><?= esc($user->fname).' '.esc($user->lname) ?></td>
+                        <td><a class="text-decoration-none" href="<?= ROOT ?>profile/<?= $class->user_id->user_id ?>"><?= esc($user->fname).' '.esc($user->lname) ?></a></td>
                         <th>Created at:</th>
                         <td><?= get_date($class->date) ?></td>
                     </tr>

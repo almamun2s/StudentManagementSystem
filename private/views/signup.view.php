@@ -6,9 +6,8 @@
 <?php $this->view('includes/header') ?>
     <div class="container-fluid">
         <div class="p-4 mt-4 mx-auto rounded shadow" style="width:100%;max-width: 325px;">
-        <?php $mode = isset($_GET['mode']) ? $_GET['mode'] : 'staff'; ?>
             <h2 class="text-center text-capitalize" >Add <?= $mode ?></h2>
-            <form action="signup" method="post">
+            <form action="signup?mode=<?= $mode ?>" method="post">
                 <input name="fname" value="<?= get_old_value('fname') ?>" placeholder="First Name" type="text" class="my-4 form-control" autofocus autocomplete="off">
                 <p class="text-danger" ><?= get_error($errors,  'fname') ?></p>
                 
@@ -29,12 +28,19 @@
                 <?php else: ?>
                     <select name="role" class="my-4 form-control" >
                         <option <?= get_selected('role', '') ?> value="">--Select a Rank--</option>
-                        <option <?= get_selected('role', 'reception') ?> value="reception">Reception</option>
-                        <option <?= get_selected('role', 'lecturer') ?> value="lecturer">Lecturer</option>
-                        <option <?= get_selected('role', 'admin') ?> value="admin">Admin</option>
-                        <?php if(Auth::user()->role == 'super'): ?>
+                        <?php if( Auth::access('reception')): ?>
+                            <option <?= get_selected('role', 'lecturer') ?> value="lecturer">Lecturer</option>
+                            <option <?= get_selected('role', 'reception') ?> value="reception">Reception</option>
+                        <?php endif;?>
+
+                        <?php if( Auth::access('admin')): ?>
+                            <option <?= get_selected('role', 'admin') ?> value="admin">Admin</option>
+                        <?php endif;?>
+
+                        <?php if( Auth::access('super')): ?>
                             <option <?= get_selected('role', 'super') ?> value="super">Super Admin</option>
                         <?php endif;?>
+
                     </select>                        
                 <?php endif; ?>
 
@@ -52,4 +58,4 @@
         </div>
     </div>
     
-<?php $this->view('includes/footer') ?> 
+<?php $this->view('includes/footer') ?>

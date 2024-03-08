@@ -8,41 +8,47 @@
         <input class="form-control mr-sm-2" type="search" placeholder="Search Students" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
-    <span class="btn btn-primary" id="addNewSchool" >Add Students</span>
+    <?php if(Auth::access('reception')) : ?>
+        <span class="btn btn-primary" id="addNewSchool" >Add Students</span>
+    <?php endif; ?>
 </nav>
 
+<?php if(Auth::access('reception')) : ?>
+    <div class="sms-add_new_school " style="align-items: flex-start;" >
+        <div class="sms-school_form border shadow p-4" style="width: 50%;" >
+            <h3 class="text-center" >Add Student</h3>
+            <input type="hidden" value="student" id="sms-class_user_type" >
+            <input type="text" class="form-control" autofocus placeholder="Type Student Name to add" id="sms-search_class_lecturers" >
 
-<div class="sms-add_new_school " style="align-items: flex-start;" >
-    <div class="sms-school_form border shadow p-4" style="width: 50%;" >
-        <h3 class="text-center" >Add Student</h3>
-        <input type="hidden" value="student" id="sms-class_user_type" >
-        <input type="text" class="form-control" autofocus placeholder="Type Student Name to add" id="sms-search_class_lecturers" >
-
-        <span class="btn btn-danger mt-4" id="addNewSchoolCancel" >Cancel</span>
-        <h3 id="sms-loading" class="text-center d-none" >Loading...</h3>
-        <form action="<?= ROOT ?>classOperate/selectLecturer/student" method="post">
-            <input type="hidden" name="class_id" value="<?= $class->class_id ?>" >
-            <div class="card-group justify-content-center" id="sms-search_class_lecturers_response" ></div>
-        </form>
+            <span class="btn btn-danger mt-4" id="addNewSchoolCancel" >Cancel</span>
+            <h3 id="sms-loading" class="text-center d-none" >Loading...</h3>
+            <form action="<?= ROOT ?>classOperate/selectLecturer/student" method="post">
+                <input type="hidden" name="class_id" value="<?= $class->class_id ?>" >
+                <div class="card-group justify-content-center" id="sms-search_class_lecturers_response" ></div>
+            </form>
+        </div>
     </div>
-</div>
+<?php endif; ?>
 
 
-
-<form action="<?= ROOT ?>classOperate/removeLecturer/student" method="post" id="sms-show_student_form" >
-    <input type="hidden" name="class_id" value="<?= $class->class_id ?>" >
-    <div class="card-group justify-content-center">
-        <?php if($users) : ?>
-            <?php foreach ($users as $user ): ?>
-                <div class="card m-2" style="max-width: 14rem;min-width: 14rem;">
-                    <?php include view_path('includes/singleUser'); ?>                    
-                </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <h2>No Students found</h2>
-        <?php endif; ?> 
-    </div>
-</form>
+<?php if(Auth::access('reception')) : ?>
+    <form action="<?= ROOT ?>classOperate/removeLecturer/student" method="post" id="sms-show_student_form" >
+<?php endif; ?>
+        <input type="hidden" name="class_id" value="<?= $class->class_id ?>" >
+        <div class="card-group justify-content-center">
+            <?php if($users) : ?>
+                <?php foreach ($users as $user ): ?>
+                    <div class="card m-2" style="max-width: 14rem;min-width: 14rem;">
+                        <?php include view_path('includes/singleUser'); ?>                    
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <h2>No Students found</h2>
+            <?php endif; ?> 
+        </div>
+<?php if(Auth::access('reception')) : ?>
+    </form>
+<?php endif; ?>
 <script>
     const showLecturerForm  = document.getElementById('sms-show_student_form');
     const userSelectBtn     = showLecturerForm.querySelectorAll('.sms-user_select_btn');

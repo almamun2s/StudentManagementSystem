@@ -4,10 +4,22 @@
  */
 class Signup extends Controller{
     public function index(){
+        if (!Auth::access('reception')) {
+            $this->redirect('errors/403');
+        }
 
         $errors = array();
 
         if (count($_POST) > 0) {
+            if ($_POST['role'] == 'admin') {
+                if (!Auth::access('admin')) {
+                    $this->redirect('errors/403');
+                }
+            }elseif( $_POST['role'] == 'super' ){
+                if (!Auth::access('super')) {
+                    $this->redirect('errors/403');
+                }
+            }
             $user = new User();
             if ($user->validate($_POST)) {
 
@@ -29,8 +41,10 @@ class Signup extends Controller{
             }
         }
     
+        $mode = isset($_GET['mode']) ? $_GET['mode'] : 'staff';
         $this->view('signup', [
-            'errors' => $errors
+            'errors'    => $errors,
+            'mode'      => $mode
         ]);
 
     }

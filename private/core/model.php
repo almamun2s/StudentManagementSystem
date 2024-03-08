@@ -73,7 +73,7 @@ class Model extends Database{
      * inserts data into a specific table. Basically models table
      *
      * @param array $data
-     * @return array|boolean
+     * @return object|array|boolean
      */
     public function insert($data){
 

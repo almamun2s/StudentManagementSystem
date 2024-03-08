@@ -6,7 +6,9 @@
 <nav class="sms-nav" >
     <ul>
         <li><a class="<?= get_active_item('home') ?>" href="<?=ROOT?>home">Dashboard</a></li>
-        <li><a class="<?= get_active_item('schools') ?>" href="<?=ROOT?>schools">schools</a></li>
+        <?php if(Auth::access('admin')): ?>
+            <li><a class="<?= get_active_item('schools') ?>" href="<?=ROOT?>schools">schools</a></li>
+        <?php endif; ?>
         <li><a class="<?= get_active_item('users') ?>" href="<?=ROOT?>users">staffs</a></li>
         <li><a class="<?= get_active_item('users/students') ?>" href="<?=ROOT?>users/students">students</a></li>
         <li><a class="<?= get_active_item('schools/class') ?>" href="<?=ROOT?>schools/class">Classes</a></li>

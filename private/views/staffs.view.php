@@ -13,7 +13,9 @@
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
             <div>
+                <?php if (Auth::access('reception')) :?>
                 <a href="<?= ROOT ?>signup?mode=<?= $mode ?>" class="btn btn-primary text-capitalize" >Add <?= $mode ?></a>
+                <?php endif; ?>
             </div>
         </nav>
         <div class="card-group justify-content-center">

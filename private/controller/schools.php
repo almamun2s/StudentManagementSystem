@@ -7,6 +7,9 @@ class Schools extends Controller{
         if (!Auth::is_logged_in()) {
             $this->redirect('login');
         }
+        if(!Auth::access('admin')){
+            $this->redirect('errors/404');
+        }
         $school = new School();
         $data   = $school->findAll();
 
@@ -22,6 +25,9 @@ class Schools extends Controller{
     public function add(){
         if (!Auth::is_logged_in()) {
             $this->redirect('login');
+        }
+        if(!Auth::access('admin')){
+            $this->redirect('errors/403');
         }
         $errors = array();
 
@@ -55,6 +61,9 @@ class Schools extends Controller{
         if (!Auth::is_logged_in()) {
             $this->redirect('login');
         }
+        if(!Auth::access('admin')){
+            $this->redirect('errors/403');
+        }
         $errors = array();
 
         if (count($_POST) > 0) {
@@ -81,6 +90,9 @@ class Schools extends Controller{
         if (!Auth::is_logged_in()) {
             $this->redirect('login');
         }
+        if(!Auth::access('admin')){
+            $this->redirect('errors/403');
+        }
         
         if (count($_POST) > 0) {
             $school = new School();
@@ -98,7 +110,7 @@ class Schools extends Controller{
         if (!Auth::is_logged_in()) {
             $this->redirect('login');
         }
-        if (Auth::user()->role != 'super') {
+        if(!Auth::access('admin')){
             $this->redirect('errors/403');
         }
         
@@ -141,6 +153,9 @@ class Schools extends Controller{
         if (!Auth::is_logged_in()) {
             $this->redirect('login');
         }
+        if(!Auth::access('reception')){
+            $this->redirect('errors/403');
+        }
         $errors = array();
 
         if (count($_POST) > 0) {
@@ -169,6 +184,9 @@ class Schools extends Controller{
         if (!Auth::is_logged_in()) {
             $this->redirect('login');
         }
+        if(!Auth::access('reception')){
+            $this->redirect('errors/403');
+        }
         $errors = array();
 
         if (count($_POST) > 0) {
@@ -194,6 +212,9 @@ class Schools extends Controller{
     public function classDelete(){
         if (!Auth::is_logged_in()) {
             $this->redirect('login');
+        }
+        if(!Auth::access('reception')){
+            $this->redirect('errors/403');
         }
         
         if (count($_POST) > 0) {
