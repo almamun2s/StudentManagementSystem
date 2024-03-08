@@ -19,8 +19,8 @@
             <li><a class="<?= get_active_item('profile') ?>" href="<?=ROOT?>profile">Profile<span>(<?= Auth::user()->fname.' '.Auth::user()->lname ?>)</span></a></li>
             <li><a href="<?=ROOT?>profile/logout">Logout</a></li>
         <?php else:?>
-            <li><a href="<?=ROOT?>login">Login</a></li>
-            <li><a href="<?=ROOT?>signup">Sign Up</a></li>
+            <li><a class="<?= get_active_item('login') ?>" href="<?=ROOT?>login">Login</a></li>
+            <li><a class="<?= get_active_item('signup') ?>" href="<?=ROOT?>signup">Sign Up</a></li>
         <?php endif;?>
     </ul>
 </nav>

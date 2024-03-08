@@ -153,7 +153,7 @@ class Schools extends Controller{
         if (!Auth::is_logged_in()) {
             $this->redirect('login');
         }
-        if(!Auth::access('reception')){
+        if(!Auth::access('lecturer')){
             $this->redirect('errors/403');
         }
         $errors = array();
@@ -184,7 +184,7 @@ class Schools extends Controller{
         if (!Auth::is_logged_in()) {
             $this->redirect('login');
         }
-        if(!Auth::access('reception')){
+        if(!Auth::access('lecturer')){
             $this->redirect('errors/403');
         }
         $errors = array();
@@ -213,7 +213,7 @@ class Schools extends Controller{
         if (!Auth::is_logged_in()) {
             $this->redirect('login');
         }
-        if(!Auth::access('reception')){
+        if(!Auth::access('lecturer')){
             $this->redirect('errors/403');
         }
         
