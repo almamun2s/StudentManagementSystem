@@ -56,36 +56,34 @@
                     </table>
                 </div>
             </div>
-            <?php if(Auth::user()->user_id == $user->user_id ): ?>
-                <div>
-                    <ul class="nav nav-pills">
-                        <li class="nav-item">
-                            <a class="nav-link <?= get_active_tab( 'info', $tab ) ?>" href="<?= ROOT ?>profile?tab=info">Basic Info</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?= get_active_tab( 'class', $tab ) ?>" href="<?= ROOT ?>profile?tab=class">Classes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?= get_active_tab( 'test', $tab ) ?>" href="<?= ROOT ?>profile?tab=test">Tests</a>
-                        </li>
-                    </ul>
-                    <?php 
-                        switch ($tab) {
-                            case 'info':
-                                include view_path('profile/tab_info');
-                                break;
-                            case 'class':
-                                include view_path('profile/tab_class');
-                                break;
-                            case 'test':
-                                include view_path('profile/tab_test');
-                                break;
-                            default:
-                                break;
-                        }
-                    ?>
-                </div>
-            <?php endif; ?>
+            <div>
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link <?= get_active_tab( 'info', $tab ) ?>" href="<?= ROOT ?>profile/<?= $user->user_id ?>?tab=info">Basic Info</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?= get_active_tab( 'class', $tab ) ?>" href="<?= ROOT ?>profile/<?= $user->user_id ?>?tab=class">Classes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?= get_active_tab( 'test', $tab ) ?>" href="<?= ROOT ?>profile/<?= $user->user_id ?>?tab=test">Tests</a>
+                    </li>
+                </ul>
+                <?php 
+                    switch ($tab) {
+                        case 'info':
+                            include view_path('profile/tab_info');
+                            break;
+                        case 'class':
+                            include view_path('profile/tab_class');
+                            break;
+                        case 'test':
+                            include view_path('profile/tab_test');
+                            break;
+                        default:
+                            break;
+                    }
+                ?>
+            </div>
         <?php else:?>
             <?php $this->redirect('errors') ?>
         <?php endif;?>

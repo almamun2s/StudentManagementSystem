@@ -36,12 +36,40 @@ class Auth{
     /**
      * Gives logged in user's data
      *
-     * @return array|string
+     * @return object|array|string
      */
     public static function user(){
         if (self::is_logged_in()) {
             return $_SESSION['user'];
         }
         return 'Unknown';
+    }
+
+    /**
+     * Access function
+     * It limits user access by their role
+     * The lowest rank is 'student'
+     * 
+     * @param string $role write your role here
+     * @return boolean
+     */
+    public static function access( $role = 'student' ){
+        if (!self::is_logged_in()) {
+            return false;
+        }
+        
+        $RANK['super']      = ['super', 'admin', 'lecturer', 'reception', 'student'];
+        $RANK['admin']      = ['admin', 'lecturer', 'reception', 'student'];
+        $RANK['lecturer']   = ['lecturer', 'reception', 'student'];
+        $RANK['reception']  = ['reception', 'student'];
+        $RANK['student']    = ['student'];
+
+        if (!isset($RANK[self::user()->role])) {
+            return false;
+        }
+        if (in_array($role, $RANK[self::user()->role])) {
+            return true;
+        }
+        return false;
     }
 }

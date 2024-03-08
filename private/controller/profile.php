@@ -3,16 +3,34 @@
  * Profile Controller
  */
 class Profile extends Controller{
-    public function index(){
+    public function index( $user_id = '' ){
         if (!Auth::is_logged_in()) {
             $this->redirect('login');
         }
-        $presentSchool = $this->findSchoolName(Auth::user()->school_id);
+        if ($user_id == '') {
+            $user = Auth::user();
+        }else{
+            $user = new User();
+            $user = $user->where('user_id', $user_id);
+            if (!$user) {
+                $this->redirect('error');
+            }else{
+                $user = $user[0];
+            }
+        }
+        $presentSchool = $this->findSchoolName($user->school_id);
+
         $tab = isset($_GET['tab']) ? $_GET['tab'] : 'info';
         $allClass = [];
         if ($tab == 'class') {
-            $classes = new Class_details('students');
-            $classes = $classes->where('user_id', Auth::user()->user_id );
+            if ($user->role == 'student') {
+                $classes = new Class_details('students');
+            }elseif ($user->role == 'lecturer') {
+                $classes = new Class_details('lecturers');
+            }else{
+                $this->redirect('errors/403');
+            }
+            $classes = $classes->where('user_id', $user->user_id );
             if ($classes) {
                 foreach ($classes as $class) {
                     $singleClass = new Classes();
@@ -23,7 +41,7 @@ class Profile extends Controller{
         }
         $this->view('profile',[
             'school'    => $presentSchool,
-            'user'      => Auth::user(),
+            'user'      => $user,
             'tab'       => $tab ,
             'classes'   => $allClass
             ]
@@ -36,31 +54,6 @@ class Profile extends Controller{
     public function logout(){
         Auth::logout();
         $this->redirect('login');
-    }
-
-    /**
-     * For visiting others profile through profile
-     * @param string $user_id
-     */
-
-    public function visit( $user_id){
-        if ($user_id == Auth::user()->user_id) {
-            $this->redirect('profile');
-        }
-        $user = new User();
-        $user = $user->where('user_id', $user_id);
-        if ($user) {   
-            $user = $user[0];
-            $presentSchool = $this->findSchoolName($user->school_id);
-        }else{
-            $presentSchool = 'not needed';
-        }
-
-        $this->view('profile',[
-            'user' => $user,
-            'school' => $presentSchool
-            ]
-        );
     }
 
     /**
