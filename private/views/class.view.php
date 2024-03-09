@@ -15,7 +15,7 @@
                     <th>Class</th>
                     <th>Created By</th>
                     <th>Created At</th>
-                    <?php if(Auth::access('reception')):?>
+                    <?php if(Auth::access('lecturer')):?>
                         <th>
                             <span class="btn btn-primary" id="addNewSchool" ><i class="fas fa-plus"></i> Add new Class</span>
                         </th>
@@ -37,7 +37,7 @@
         </div>
     </div>
     
-    <?php if(Auth::access('reception')):?>
+    <?php if(Auth::access('lecturer')):?>
         <!-- Add New Class Popup  -->
         <?php
             if ( !isset($_POST['id']) && isset($errors['class_name'])) {

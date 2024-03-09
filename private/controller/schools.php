@@ -184,16 +184,21 @@ class Schools extends Controller{
         if (!Auth::is_logged_in()) {
             $this->redirect('login');
         }
-        if(!Auth::access('lecturer')){
-            $this->redirect('errors/403');
-        }
         $errors = array();
 
         if (count($_POST) > 0) {
             $class = new Classes();
+            $class_id = $_POST['id'];
+            $myClass = $class->where('class_id', $class_id);
+            $myClass = $myClass[0];
+
+            if (!Auth::owner($myClass)) {
+                $this->redirect('errors/403');
+            }
+
             if ($class->validate($_POST)) {
                 $arr['class_name']   = $_POST['class_name'];
-                $class->update($_POST['id'], $arr);
+                $class->update($class_id, $arr);
                 $this->redirect('schools/class');
             }else{
                 $data   = $class->where('school_id', Auth::user()->school_id );
@@ -213,14 +218,18 @@ class Schools extends Controller{
         if (!Auth::is_logged_in()) {
             $this->redirect('login');
         }
-        if(!Auth::access('lecturer')){
+        $class = new Classes();
+        $class_id = $_POST['id'];
+        $myClass = $class->where('id', $class_id);
+        $myClass = $myClass[0];
+
+        if (!Auth::owner($myClass->user_id)) {
             $this->redirect('errors/403');
         }
-        
         if (count($_POST) > 0) {
             $classes = new Classes();
 
-            $classes->delete($_POST['id']);
+            $classes->delete($class_id);
             $this->redirect('schools/class');
 
         }
