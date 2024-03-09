@@ -12,7 +12,16 @@
             $this->redirect('errors/404');
         }
         $user = new User();
-        $data = $user->run('select * from users where school_id = :school_id && role != :role order by id desc', ['school_id' => Auth::user()->school_id, 'role' => 'student']);
+        $query = 'select * from users where school_id = :school_id && role != :role order by id desc';
+        $arr =  ['school_id' => Auth::user()->school_id, 'role' => 'student'];
+
+        if (isset($_GET['find'])) {
+            $find = '%'. $_GET['find'] . '%';
+            $query = 'select * from users where school_id = :school_id && role != :role && ( fname like :find || lname like :find ) order by id desc';
+            $arr =  ['school_id' => Auth::user()->school_id, 'role' => 'student', 'find' => $find ];
+        }
+
+        $data = $user->run( $query , $arr );
 
         $this->view('staffs', [
             'users' => $data,
@@ -29,7 +38,16 @@
             $this->redirect('errors/404');
         }
         $user = new User();
-        $data = $user->run('select * from users where school_id = :school_id && role = :role order by id desc', ['school_id' => Auth::user()->school_id, 'role' => 'student']);
+        $query = 'select * from users where school_id = :school_id && role = :role order by id desc';
+        $arr = ['school_id' => Auth::user()->school_id, 'role' => 'student'];
+
+        if (isset($_GET['find'])) {
+            $find = '%'. $_GET['find'] . '%';
+            $query = 'select * from users where school_id = :school_id && role = :role && ( fname like :find || lname like :find ) order by id desc';
+            $arr =  ['school_id' => Auth::user()->school_id, 'role' => 'student', 'find' => $find ];
+        }
+
+        $data = $user->run( $query , $arr );
 
         $this->view('staffs', [
             'users' => $data,
