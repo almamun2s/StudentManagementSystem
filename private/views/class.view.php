@@ -23,10 +23,9 @@
                 </tr>
                 <?php if($classes) : ?>
                     <?php foreach ($classes as $class ): ?>
-                        <?php // $color = $class->class_id == Auth::user()->class_id ? 'bg-primary text-white' : '' ?>
+
                         <?php include view_path('class/class_item'); ?>
-
-
+                        
                     <?php endforeach; ?>
                     <?php else: ?>
                         <h2>No class found</h2>
