@@ -32,8 +32,13 @@
                 <h2>No <?= $mode ?> found</h2>
             <?php endif; ?>
 
-
+            
         </div>
+        <?php 
+            if ($pagination) {
+                echo $pagination->display();
+            }
+        ?>
     </div>
     
 <?php $this->view('includes/footer') ?>
