@@ -40,10 +40,6 @@ class Pager{
 
         $this->link         = ROOT . str_replace('url=','', $_SERVER['QUERY_STRING']);
         $this->link         = !strstr($this->link, 'page=') ? $this->link.'&page=1' : $this->link;
-
-        echo '<pre>';
-        var_dump($this->currentPage);
-        echo '</pre>';
         
     }
 

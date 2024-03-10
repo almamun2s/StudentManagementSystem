@@ -60,7 +60,9 @@
                     $class_details->insert($arr);
                     $this->redirect('schools/singleClass/'.$class_id.'?tab='.$tab);
                 }else {
-                    $this->redirect('errors/403');
+                    // $this->redirect('errors/403');
+                    $class_details->run("update $table_name set disabled = 0 where class_id = :class_id and user_id = :user_id", ['user_id' => $user_id, 'class_id' => $class_id ] );
+                    $this->redirect('schools/singleClass/'.$class_id.'?tab='.$tab);
                 }
 
             }else{
@@ -98,7 +100,8 @@
         }
 
 
-        $class_details->run("delete from  $table_name  where class_id = :class_id and user_id = :user_id", ['user_id' => $user_id, 'class_id' => $class_id ] );
+        // $class_details->run("delete from  $table_name  where class_id = :class_id and user_id = :user_id", ['user_id' => $user_id, 'class_id' => $class_id ] );
+        $class_details->run("update $table_name set disabled = 1 where class_id = :class_id and user_id = :user_id", ['user_id' => $user_id, 'class_id' => $class_id ] );
         $this->redirect('schools/singleClass/'.$class_id.'?tab='.$tab);
     }
     

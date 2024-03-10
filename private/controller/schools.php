@@ -265,32 +265,25 @@ class Schools extends Controller{
             $_GET['select'] = true;
 
             if ($tab == 'lecturers') {
-                $class_lecturers = new Class_details('lecturers');
-                $class_lecturers = $class_lecturers->where('class_id', $class_id);
-
-                $allUsers = [];
-                $users = new User();
-                if ($class_lecturers) {   
-                    foreach ($class_lecturers as $class_lecturer) {
-                        $user = $users->where('user_id', $class_lecturer->user_id);
-                        
-                        $allUsers = array_merge($allUsers, $user);
-                    }
-                }
+                $class_details = new Class_details('lecturers');
+                $query  = "select * from class_lecturers where class_id = :class_id and disabled = 0";
+                $class_details = $class_details->run($query, ['class_id' => $class_id ]);
 
 
             }elseif ($tab == 'students') {
-                $class_lecturers = new Class_details('students');
-                $class_lecturers = $class_lecturers->where('class_id', $class_id);
+                $class_details = new Class_details('students');
+                $query  = "select * from class_students where class_id = :class_id and disabled = 0";
+                $class_details = $class_details->run($query, ['class_id' => $class_id ]);
 
-                $allUsers = [];
-                $users = new User();
-                if ($class_lecturers) {   
-                    foreach ($class_lecturers as $class_lecturer) {
-                        $user = $users->where('user_id', $class_lecturer->user_id);
-                        
-                        $allUsers = array_merge($allUsers, $user);
-                    }
+            }
+
+            $allUsers = [];
+            $users = new User();
+            if ($class_details) {   
+                foreach ($class_details as $class_detail) {
+                    $user = $users->where('user_id', $class_detail->user_id);
+                    
+                    $allUsers = array_merge($allUsers, $user);
                 }
             }
 
