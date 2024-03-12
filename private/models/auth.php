@@ -97,4 +97,23 @@ class Auth{
 
         return false;
     }
+    /**
+     * Keep the argument as user 
+     *
+     * @param object|array $user This is user information
+     * @return boolean
+     */
+    public static function is_owner( $user ){
+        if (!self::is_logged_in()) {
+            return false;
+        }
+
+        if (isset($user->user_id)) {
+            if (self::user()->user_id == $user->user_id ) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
 }

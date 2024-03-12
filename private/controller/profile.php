@@ -101,6 +101,19 @@ class Profile extends Controller{
                 // If user gives wrong user_id 
                 $this->redirect('error');
             }
+            $theUser = $theUser[0];
+        }
+
+        if ((!Auth::access('reception')) && (!Auth::is_owner($theUser))) {
+            $this->redirect('errors');
+        }
+        if (($theUser->role == 'admin') ) {
+            if ((!Auth::access('super')) && (!Auth::is_owner($theUser)) ) {
+                $this->redirect('errors');
+            }
+        }
+        if (($theUser->role  == 'super') && (!Auth::is_owner(($theUser)))) {
+            $this->redirect('errors');
         }
 
 
@@ -133,7 +146,7 @@ class Profile extends Controller{
         $errors= $user->errors;
 
         $this->view('profile/profile_edit', [
-            'user'      => $theUser[0],
+            'user'      => $theUser,
             'errors'    => $errors,
 
         ]);
