@@ -162,7 +162,9 @@ function get_image( $image_name, $user = null ){
             // $image = 
         }
     }else{
-        $image = ROOT. 'assets/uploads/'.$image_name;
+        // $image = ROOT. 'assets/uploads/'.$image_name;
+        $imgClass = new Image();
+        $image = ROOT . $imgClass->profile_image('assets/uploads/'.$image_name);
     }
 
     return $image;
