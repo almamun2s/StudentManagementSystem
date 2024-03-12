@@ -6,10 +6,18 @@
 // Set the default timezone
 date_default_timezone_set('Asia/Dhaka');
 
-// In form this will return the Old value of a input
-function get_old_value(string $key){
+/**
+ *  In form this will return the Old value of a input
+ *
+ * @param string $key
+ * @param object|null $object
+ * @return string
+ */
+function get_old_value(string $key, $object = null  ){
     if (isset($_POST[$key])) {
-        return $_POST[$key];
+        return esc($_POST[$key]);
+    }elseif(is_object($object)){
+        return esc($object->$key);
     }
     return '';
 }
@@ -19,11 +27,17 @@ function get_old_value(string $key){
  * 
  * @param string $key
  * @param string $value
+ * @param object|null $object
  * @return string
  */
-function get_selected( $key, $value){
+function get_selected( $key, $value, $object = null ){
     if ( isset($_POST[$key])) {
         if ( $_POST[$key] == $value) {
+            return 'selected';
+        }
+    }elseif(is_object($object)){
+        $object->$key;
+        if ($object->$key == $value ) {
             return 'selected';
         }
     }

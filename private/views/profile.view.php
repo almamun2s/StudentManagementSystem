@@ -26,6 +26,9 @@
                     ?>
                     <img src="<?= $profile ?>" class="border border-primary d-block mx-auto rounded-circle" style="width:150px" >
                     <h3 class="text-center" ><?= esc($user->fname).' '.esc($user->lname) ?></h3>
+                    <div class="text-center" >
+                        <a href="<?= ROOT ?>profile/edit/<?= $user->user_id ?>" class="btn btn-success" >Edit</a>
+                    </div>
                 </div>
                 <div class="col-sm-8 col-md-9 bg-light p-2">
                     <table class="table table-hover table-striped table-bordered" >

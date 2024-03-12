@@ -30,14 +30,23 @@ class User extends Model{
         'make_hash_password',
         'make_date'
     ];
+    /**
+     * Before updating data to table these function will be called
+     *
+     * @var array
+     */
+    protected $beforeUpdate = [
+        'make_hash_password',
+    ];
 
     /**
      * Validates data for inserting or updating to table
      *
      * @param array $data
+     * @param int $id 
      * @return boolean
      */
-    public function validate(array $data){
+    public function validate(array $data, $id = '' ){
         $this->errors = array();
 
         // Check first name 
@@ -59,8 +68,16 @@ class User extends Model{
             $this->errors['email'] = 'Email cannot be empty';
         }elseif ( !filter_var( $data['email'] , FILTER_VALIDATE_EMAIL)) {
             $this->errors['email'] = 'Email is not valid';
-        }elseif( $this->where('email', $data['email'])){
-            $this->errors['email'] = 'This email is already exists';
+        }else{
+            if (trim($id == '')) {
+                if ( $this->where('email', $data['email'])) {
+                    $this->errors['email'] = 'This email is already exists';
+                }
+            }else {
+                if ($this->run("select email from $this->table where email = :email && id != :id ", ['email' => $data['email'], 'id' => $id ] )) {
+                    $this->errors['email'] = 'This email is already exists';
+                }
+            }
         }
         
         // Check Gender
@@ -80,12 +97,14 @@ class User extends Model{
         }
 
         // Check for Password
-        if (empty($data['password'])) {
-            $this->errors['password'] = 'Password cannot be empty';
-        }elseif ( strlen($data['password']) < 8 ) {
-            $this->errors['password'] = 'Password must at least 8 charactor';
-        }elseif ( $data['password'] !== $data['password2'] ) {
-            $this->errors['password'] = 'Password did not match';
+        if (isset($data['password'])) {
+            if (empty($data['password'])) {
+                $this->errors['password'] = 'Password cannot be empty';
+            }elseif ( strlen($data['password']) < 8 ) {
+                $this->errors['password'] = 'Password must at least 8 charactor';
+            }elseif ( $data['password'] !== $data['password2'] ) {
+                $this->errors['password'] = 'Password did not match';
+            }
         }
 
         if (count($this->errors) == 0 ) {
@@ -130,7 +149,9 @@ class User extends Model{
      */
     public function make_hash_password($data){
         
-        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT );
+        if (isset($data['password'])) {
+            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT );
+        }
         return $data;
     }
     

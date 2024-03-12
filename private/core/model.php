@@ -106,19 +106,38 @@ class Model extends Database{
     /**
      * Updates models table by id.
      *
-     * @param integer $id
+     * @param integer|string $id
      * @param array $data
+     * @param string $columnName
      * @return array|boolean
      */
-    public function update( $id, $data){
+    public function update( $id, $data, $columnName = 'id' ){
+        // Check for allowed column
+        if ( property_exists($this, 'allowedColumn' )) {
+    
+            foreach ($data as $key => $column) {
+                if ( !in_array($key, $this->allowedColumn )) {
+                    // Remove the column if it is not allowed for editing
+                    unset($data[$key]);
+                }
+            }
+        }
+
+        if ( property_exists($this, 'beforeUpdate' )) {
+            
+            foreach ($this->beforeUpdate as $func) {
+                $data = $this->$func($data);
+            }
+        }
+
         $setData = '';
         foreach ($data as $key => $value) {
             $setData .= $key. " = :" .$key .', ';
         }
         $setData = trim($setData , ", ");
-        $data['id'] = $id;
+        $data[$columnName] = $id ;
 
-        $query = "UPDATE $this->table SET  $setData WHERE id = :id";
+        $query = "UPDATE $this->table SET  $setData WHERE $columnName = :$columnName ";
 
         return $this->run($query, $data);
     }

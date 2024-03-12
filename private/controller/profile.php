@@ -79,4 +79,47 @@ class Profile extends Controller{
             return $presentSchool;
         }
     }
+
+    /**
+     * Profile edit function
+     *
+     * @param string $user_id
+     */
+    public function edit( $user_id = '' ){
+        if (!Auth::is_logged_in()) {
+            // if user is not logged in 
+            $this->redirect('login');
+        }
+
+        if ($user_id == '') {
+            $this->redirect('error');
+        }else{
+            // If user visits others profile
+            $user = new User();
+            $theUser = $user->where('user_id', $user_id);
+            if (!$theUser) {
+                // If user gives wrong user_id 
+                $this->redirect('error');
+            }
+        }
+
+
+        if (count($_POST) > 0 ) {
+            if (trim($_POST['password']) == '' )  {
+                unset($_POST['password']);
+                unset($_POST['password2']);
+            }
+            if($user->validate($_POST, $theUser[0]->id )){
+                $user->update($theUser[0]->id, $_POST );
+                $this->redirect('profile/edit/'.$user_id);
+            }
+        }
+        $errors= $user->errors;
+
+        $this->view('profile/profile_edit', [
+            'user'      => $theUser[0],
+            'errors'    => $errors,
+
+        ]);
+    }
 }

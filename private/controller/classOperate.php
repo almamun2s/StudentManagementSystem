@@ -24,7 +24,7 @@
             $user = new User();
             $user = $user->where('user_id', $user_id)[0];
 
-            // // Check if the current user is belongs to current class
+            // Check if the current user is belongs to current class
             $class    = new Classes();
             $data     = $class->where('school_id', $user->school_id );
 
@@ -60,7 +60,6 @@
                     $class_details->insert($arr);
                     $this->redirect('schools/singleClass/'.$class_id.'?tab='.$tab);
                 }else {
-                    // $this->redirect('errors/403');
                     $class_details->run("update $table_name set disabled = 0 where class_id = :class_id and user_id = :user_id", ['user_id' => $user_id, 'class_id' => $class_id ] );
                     $this->redirect('schools/singleClass/'.$class_id.'?tab='.$tab);
                 }
@@ -99,8 +98,6 @@
             $this->redirect('errors/403');
         }
 
-
-        // $class_details->run("delete from  $table_name  where class_id = :class_id and user_id = :user_id", ['user_id' => $user_id, 'class_id' => $class_id ] );
         $class_details->run("update $table_name set disabled = 1 where class_id = :class_id and user_id = :user_id", ['user_id' => $user_id, 'class_id' => $class_id ] );
         $this->redirect('schools/singleClass/'.$class_id.'?tab='.$tab);
     }
