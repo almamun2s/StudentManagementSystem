@@ -11,26 +11,19 @@
 </style>
     <div class="container-fluid p-4 shadow mx-auto" style="max-width: 1200px;">
         <?php if($user) : ?>
-            <div class="row">
-                <div class="col-sm-4 col-md-3">
-                    <?php 
-                        $profile = ROOT.'assets/images/'.$user->profile_pic;
-                        if (!file_exists($profile)) {
-                            if ($user->gender == 'male') {
-                                $profile = ROOT.'assets/img/user_male.jpg';
-                            }else {
-                                $profile = ROOT.'assets/img/user_female.jpg';
-                            }
-                        }
-                    ?>
-                    <img src="<?= $profile ?>" class="border border-primary d-block mx-auto rounded-circle" style="width:150px" >
-                    <div class="text-center mt-4" >
-                        <a class="btn btn-warning" href="#">Upload image</a>
-                        <span class="btn btn-danger" >Delete Profile</span>
+            <form action="" method="post" enctype="multipart/form-data" >
+                <div class="row">
+                    <div class="col-sm-4 col-md-3">
+                        <img src="<?= get_image($user->profile_pic, $user) ?>" class="border border-primary d-block mx-auto rounded-circle" style="width:150px" >
+                        <div class="text-center mt-4" >
+                            <label for="sms-profile_image" class="btn btn-success" >
+                                <input style="display: none;" onchange="smsProfileImageChange(this.files[0].name)" type="file" name="image" id="sms-profile_image">Upload image
+                            </label>
+                            <p class="sms-file_info"></p>
+                            <!-- <span class="btn btn-danger" >Delete Profile</span> -->
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-8 col-md-9 bg-light p-2">
-                    <form action="" method="post">
+                    <div class="col-sm-8 col-md-9 bg-light p-2">
                         <input name="fname" value="<?= get_old_value('fname', $user) ?>" placeholder="First Name" type="text" class="my-4 form-control" autofocus autocomplete="off">
                         <p class="text-danger" ><?= get_error($errors,  'fname') ?></p>
                         
@@ -78,9 +71,9 @@
                         
                         <button type="submit" class="btn btn-primary float-end">Update Data</button>
                         <a href="<?= ROOT ?>profile/<?= $user->user_id ?>" type="button" class="btn btn-danger text-white">Cancel</a>             
-                    </form>
+                    </div>
                 </div>
-            </div>
+            </form>
         <?php else:?>
             <?php $this->redirect('errors') ?>
         <?php endif;?>

@@ -14,19 +14,9 @@
             <?php $this->view('includes/b_crumb') ?>
             <div class="row">
                 <div class="col-sm-4 col-md-3">
-                    <?php 
-                        $profile = ROOT.'assets/images/'.$user->profile_pic;
-                        if (!file_exists($profile)) {
-                            if ($user->gender == 'male') {
-                                $profile = ROOT.'assets/img/user_male.jpg';
-                            }else {
-                                $profile = ROOT.'assets/img/user_female.jpg';
-                            }
-                        }
-                    ?>
-                    <img src="<?= $profile ?>" class="border border-primary d-block mx-auto rounded-circle" style="width:150px" >
+                    <img src="<?= get_image($user->profile_pic, $user) ?>" class="border border-primary d-block mx-auto rounded-circle" style="width:150px" >
                     <h3 class="text-center" ><?= esc($user->fname).' '.esc($user->lname) ?></h3>
-                    <div class="text-center" >
+                    <div class="text-center mb-2" >
                         <a href="<?= ROOT ?>profile/edit/<?= $user->user_id ?>" class="btn btn-success" >Edit</a>
                     </div>
                 </div>

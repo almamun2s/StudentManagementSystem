@@ -141,3 +141,29 @@ function view_path($view){
         return 'private/views/404.view.php';
     }
 }
+
+/**
+ * Get image link by providing name only
+ *
+ * @param string $image_name
+ * @param object|null $user
+ * @return string
+ */
+function get_image( $image_name, $user = null ){
+    $image_file = 'assets/uploads/'.$image_name ;
+    if ((!file_exists($image_file)) || ($image_name == '') ) {
+        if (is_object($user)) {
+            if ($user->gender == 'male') {
+                $image = ROOT.'assets/img/user_male.jpg';
+            }else {
+                $image = ROOT.'assets/img/user_female.jpg';
+            }
+        }else{
+            // $image = 
+        }
+    }else{
+        $image = ROOT. 'assets/uploads/'.$image_name;
+    }
+
+    return $image;
+}

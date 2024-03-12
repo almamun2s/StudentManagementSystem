@@ -16,7 +16,9 @@ class User extends Model{
         'email',
         'gender',
         'role',
-        'password'
+        'password',
+        'profile_pic',
+        'school_id'
     ];
 
     /**

@@ -110,6 +110,22 @@ class Profile extends Controller{
                 unset($_POST['password2']);
             }
             if($user->validate($_POST, $theUser[0]->id )){
+                if ($_FILES > 0 ) {
+                    $allowedFileType = ['image/jpg', 'image/jpeg', 'image/png' ];
+                    if (($_FILES['image']['error'] == 0) && (in_array($_FILES['image']['type'], $allowedFileType ))) {
+                        $folder = 'assets/uploads/';
+                        if (!file_exists($folder)) {
+                            mkdir($folder, 0777, true );
+                        }
+                        $destination = $folder . $_FILES['image']['name'];
+                        move_uploaded_file($_FILES['image']['tmp_name'], $destination );
+                        $_POST['profile_pic'] = $_FILES['image']['name'];
+                    }
+                }
+
+                if ( ($_POST['role'] == 'super') && Auth::user()->role != 'super' ) {
+                    $_POST['role'] = 'admin';
+                }
                 $user->update($theUser[0]->id, $_POST );
                 $this->redirect('profile/edit/'.$user_id);
             }

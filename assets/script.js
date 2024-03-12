@@ -23,3 +23,7 @@ document.addEventListener('keydown', function(event) {
         addSchoolPopup.classList.remove('sms-add_new_school_show');
     }
 });
+
+function smsProfileImageChange(file_name){
+    document.querySelector('.sms-file_info').innerHTML = file_name;
+}
