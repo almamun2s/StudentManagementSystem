@@ -10,7 +10,7 @@
      *
      * @var string
      */
-    protected $table;
+    public $table;
 
     /**
      * These are the column name of table that are allowed for editing or adding data.

@@ -17,7 +17,7 @@
 
         <?php endforeach;?>
     <?php else:?>
-        <h4 class="text-center" >Did not joined any class yet.</h4>
+        <tr><td  class="text-center" colspan="5">Did not joined any class yet.</td></tr>
     <?php endif;?>
 </table>
 

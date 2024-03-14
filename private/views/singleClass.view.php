@@ -54,7 +54,7 @@
                 ?>
             </div>
         <?php else:?>
-            <?php $this->redirect('errors') ?>
+            <?php  $this->redirect('errors') ?>
         <?php endif;?>
     </div>
     

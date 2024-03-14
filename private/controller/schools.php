@@ -248,6 +248,9 @@ class Schools extends Controller{
         $class    = new Classes();
         $data     = $class->where('school_id', Auth::user()->school_id );
 
+        // Define an empty array for tests so that it can avoid errors
+        $tests = [];
+
         $haveClass = false;
         if ($data) {   
             foreach ($data as $singleClass ) {
@@ -275,15 +278,20 @@ class Schools extends Controller{
                 $query  = "select * from class_students where class_id = :class_id and disabled = 0";
                 $class_details = $class_details->run($query, ['class_id' => $class_id ]);
 
+            }elseif($tab == 'tests'){
+                $tests = new Test();
+                $tests = $tests->where('class_id', $class->class_id );
             }
 
             $allUsers = [];
-            $users = new User();
-            if ($class_details) {   
-                foreach ($class_details as $class_detail) {
-                    $user = $users->where('user_id', $class_detail->user_id);
-                    
-                    $allUsers = array_merge($allUsers, $user);
+            if (($tab == 'lecturers') || ($tab == 'students')) {
+                $users = new User();
+                if ($class_details) {   
+                    foreach ($class_details as $class_detail) {
+                        $user = $users->where('user_id', $class_detail->user_id);
+                        
+                        $allUsers = array_merge($allUsers, $user);
+                    }
                 }
             }
 
@@ -292,7 +300,8 @@ class Schools extends Controller{
                 'class' => $class,
                 'user'  => $class->user_id,
                 'tab'   => $tab,
-                'users' => $allUsers
+                'users' => $allUsers,
+                'tests' => $tests
             ]);
         }else{
             $this->view('singleClass', [
