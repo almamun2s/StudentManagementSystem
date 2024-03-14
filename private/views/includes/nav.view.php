@@ -17,7 +17,6 @@
             <?php endif; ?>
 
             <li><a class="<?= get_active_item('schools/class') ?>" href="<?=ROOT?>schools/class">Classes</a></li>
-            <li><a class="<?= get_active_item('tests') ?>" href="<?=ROOT?>tests" class="active" >Tests</a></li>
         <?php endif;?>
     </ul>
     <ul>

@@ -37,7 +37,7 @@ class Profile extends Controller{
             }
 
             $query = "select * from $classes->table where user_id = :user_id and disabled = 0 ";
-            $classes =  $classes->run($query, ['user_id' => $user_id ]);
+            $classes =  $classes->run($query, ['user_id' => $user->user_id ]);
             if ($classes) {
                 foreach ($classes as $class) {
                     $singleClass = new Classes();

@@ -4,7 +4,9 @@
  */
 class Tests extends Controller{
     // No index is needed for tests. Because it is already in schools controller 
-
+    public function index(){
+        $this->redirect('errors');
+    }
 
     /**
      * Adding tests
